@@ -1,0 +1,9 @@
+.goods {
+  @include flex();
+  flex-wrap: wrap;
+  flex-basis: 70%;
+
+  &__card-wrapper {
+    @include autoGrid();
+  }
+}

@@ -1,0 +1,6 @@
+.filter {
+  @include flex();
+  flex-wrap: wrap;
+  gap: 1rem;
+  flex-basis: 100%;
+}

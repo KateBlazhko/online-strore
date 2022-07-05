@@ -20,14 +20,14 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'index.html',
+            template: './src/index.html',
         }),
         new CleanWebpackPlugin(),
         new CopyPlugin({
             patterns: [
-                { from: './src/assets/img',
-                  to: path.resolve(__dirname, 'dist/assets/img')
-                },
+                // { from: './src/assets/img',
+                //   to: path.resolve(__dirname, 'dist/assets/img')
+                // },
                 { from: './src/assets/json',
                   to: path.resolve(__dirname, 'dist/assets/json')
                 },

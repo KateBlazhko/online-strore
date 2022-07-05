@@ -1,0 +1,14 @@
+@mixin flex ($aling: start, $justify: space-between, $direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $aling;
+  justify-content: $justify;
+}
+
+@mixin autoGrid ($minmax: 20rem) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($minmax, 1fr)); 
+  grid-gap: 1em;
+
+  width: 100%;
+}

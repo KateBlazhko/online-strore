@@ -1,0 +1,5 @@
+.settings {
+  @include flex();
+  flex-wrap: wrap;
+  flex-basis: 30%;
+}

@@ -1,0 +1,28 @@
+@import '~normalize.css';
+
+//abstracts
+// @import './assets/styles/abstracts/function';
+@import './assets/styles/abstracts/keyframes';
+@import './assets/styles/abstracts/mixin';
+// @import './assets/styles/abstracts/placeholders';
+@import './assets/styles/abstracts/variables';
+
+//base
+@import './assets/styles/base/base';
+@import './assets/styles/base/fonts';
+
+//components
+@import './assets/styles/components/burger';
+@import './assets/styles/components/card';
+@import './assets/styles/components/title';
+@import './assets/styles/components/filter';
+
+//layout
+@import './assets/styles/layout/container';
+@import './assets/styles/layout/footer';
+@import './assets/styles/layout/header';
+@import './assets/styles/layout/popup';
+@import './assets/styles/layout/settings';
+@import './assets/styles/layout/goods';
+
+
