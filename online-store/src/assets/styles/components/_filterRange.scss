@@ -1,0 +1,15 @@
+.filter-range {
+
+  width: 90%;
+
+  .input-range {
+
+    width: 100%;
+    min-height: 10rem;
+    
+    @include imput-range-two-thumb(6rem, $input-track-color,  $input-thumb-color);
+
+  }
+
+}
+
