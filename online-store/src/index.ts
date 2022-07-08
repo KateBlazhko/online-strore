@@ -1,10 +1,10 @@
 import App from './components/app/app';
-import { AppModel } from './components/model/appModel';
+import { AppState } from './components/app/appState';
 import './style.scss';
 
-const appState = new AppModel()
+const appState = new AppState()
 
-const app: App = new App();
+const app: App = new App(appState);
 app.start();
 
 window.onbeforeunload = ()=>{

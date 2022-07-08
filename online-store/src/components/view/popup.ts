@@ -1,6 +1,6 @@
 import Control from '../common/control';
 import * as func from '../common/function';
-import { IDataItem } from '../controller/appController';
+import { IDataItem } from '../model/appModel';
 
 class Popup extends Control {
   private name: Control
@@ -20,7 +20,7 @@ class Popup extends Control {
 
 			const popupData = new Control (container.node, 'div', 'popup-data');
 
-			this.name = new Control (popupData.node, 'h3', 'title', data.name);
+			this.name = new Control (popupData.node, 'h3', 'title', data.model);
 			const subname = new Control (popupData.node, 'h4', 'subtitle');
 
 			// this.type = new Control (subname.node, 'span', 'text', pet.type);

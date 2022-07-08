@@ -12,6 +12,7 @@ const config = {
     entry: './src/index.ts',
     devtool: 'source-map',
     output: {
+        filename: 'index.js',
         path: path.resolve(__dirname, 'dist'),
     },
     devServer: {
@@ -25,9 +26,9 @@ const config = {
         new CleanWebpackPlugin(),
         new CopyPlugin({
             patterns: [
-                // { from: './src/assets/img',
-                //   to: path.resolve(__dirname, 'dist/assets/img')
-                // },
+                { from: './src/assets/img',
+                  to: path.resolve(__dirname, 'dist/assets/img')
+                },
                 { from: './src/assets/json',
                   to: path.resolve(__dirname, 'dist/assets/json')
                 },

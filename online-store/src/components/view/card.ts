@@ -2,30 +2,34 @@ import Control from '../common/control';
 import * as func from '../common/function';
 
 import Popup from './popup';
-// import DataItem from '../controller/dataItem';
-import { IDataItem } from '../controller/appController'
+import { IDataItem } from '../model/appModel';
 
 
 export class Card extends Control {
   public cardNumber: number
-  public name: Control
+  // public model: Control
 
-  // private data: IDataItem
+  private data: IDataItem
 
     constructor(parent: HTMLElement | null, className: string, cardNumber: number, data: IDataItem) {
       super(parent, 'div', className);
       this.cardNumber = cardNumber;
-      // this.data = data
-      // const img = new Image(this.node, 'card-img', `assets/img/${this.cardNumber}.png`, `pets-img`);
-      this.name = new Control(this.node, 'div','card-name', cardNumber.toString());
-      const button = new Control(this.node, 'div', 'card-button', 'Положить в корзину');
+      this.data = data
 
-      this.name.node.onclick = () => {
-       document.body.style.overflow = 'hidden';          
+      const img = new Control(this.node, 'div', 'card__img');
+      img.node.style.backgroundImage= `url(./assets/img/${this.data.image})`;
+
+      const model = new Control(this.node, 'div','card__name', this.data.model);
+      const button = new Control(this.node, 'div', 'card__button', 'Положить в корзину');
+    
+      img.node.onclick = () => {
+       document.body.style.overflow = 'hidden';   
+       document.body.style.marginRight = `${this.getScrollWidth()}px`       
           const popup = new Popup (document.documentElement, 'popup', data)
         	popup.onClose = ()=>{
           	popup.node.remove();
             document.body.style.overflow = 'visible';
+            document.body.style.marginRight = `0px`
           }
       }
 
@@ -34,7 +38,10 @@ export class Card extends Control {
       }
     }
 
-    getCardNumber() {
-      return this.cardNumber
+    private getScrollWidth() {
+      const scroll = new Control(document.body, 'div', 'scroll');
+      const scrollWidth = scroll.node.offsetWidth - scroll.node.clientWidth;
+      scroll.destroy()
+      return scrollWidth
     }
 }
