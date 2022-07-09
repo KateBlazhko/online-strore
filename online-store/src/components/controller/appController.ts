@@ -2,12 +2,11 @@ import Loader from './loader';
 import AppState from '../app/appState';
 import { IDataState } from '../app/appState';
 import { IDataItem } from '../model/appModel';
-import { IDataInputRange } from '../app/optionsInputRange';
-
+import { paramInputRange } from '../app/optionsInputRange'
 
 type Callback<Data> = (data: Data) => void;
 
-class AppController extends Loader{
+class AppController extends Loader {
   state: AppState
 
   constructor(state: AppState) {
@@ -20,21 +19,38 @@ class AppController extends Loader{
   }
 
   public onInputRangeChange(idValue: keyof IDataItem, value: string, isLeft: boolean) {
+    const nameValue = isLeft ? 'left' : 'right'
+    
+    const newSource: IDataState =  this.state.dataState[idValue] ? 
+      {
+        [idValue]: {
+           ...this.state.dataState[idValue],
+           [nameValue]: value
+        }
+      } :
+      {
+        [idValue]: {
+           [nameValue]: value
+        }
+      } 
 
-    const optionsInputRange = this.state.dataState.optionsInputRange
-    const newSource = optionsInputRange.map(input => {
+      this.state.dataState = {
+        ...this.state.dataState,
+        ...newSource,
+      } 
+  }
 
-      if (input.id === idValue) {
-        if (isLeft) input.value.left = value
-        else input.value.right = value
-      }
+  public onInputRangeReset(idValue: keyof IDataItem, isLeft: boolean) {
+    const nameValue = isLeft ? 'left' : 'right'
 
-      return input
-    })
+    const item  = this.state.dataState[idValue]
 
-    this.state.dataState = {
-      ...this.state.dataState,
-      optionsInputRange: newSource,
+    if (item && !Array.isArray(item)) {
+      delete item[nameValue]
+    }
+
+    if (Object.keys(item).length == 0) {
+     delete this.state.dataState[idValue]
     }
   }
 }

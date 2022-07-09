@@ -1,6 +1,5 @@
 import Control from "../common/control";
-import { IDataState } from '../app/appState'
-import { IDataInputRange, IParamInputRange } from '../app/optionsInputRange';
+import { IParamInputRange } from '../app/optionsInputRange';
 import InputDoubleRange from './inputDRange'
 
 class FilterRange extends Control {
@@ -8,9 +7,9 @@ class FilterRange extends Control {
   constructor(
     parent: HTMLElement | null,
     className: string,
-    options: IDataInputRange[],
     param: IParamInputRange[],
-    onChange: (id: string, value:string, isLeft: boolean) => void) {
+    onChange: (id: string, value:string, isLeft: boolean) => void,
+    onReset: (id: string, isLeft: boolean) => void) {
 
     super(parent, 'div', className)
 
@@ -28,9 +27,9 @@ class FilterRange extends Control {
       new InputDoubleRange(
         item.node,
         'input-range',
-        options[index],
         param[index],
-        onChange);
+        onChange,
+        onReset);
     })
   }
 

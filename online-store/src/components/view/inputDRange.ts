@@ -1,7 +1,6 @@
 import Control from '../common/control';
 import InputRange from '../common/inputRange';
-import { IDataState } from '../app/appState'
-import { IDataInputRange, IParamInputRange } from '../app/optionsInputRange';
+import { IParamInputRange, paramInputRange } from '../app/optionsInputRange'
 
 class InputDoubleRange extends Control {
   public static id: number;
@@ -16,13 +15,16 @@ class InputDoubleRange extends Control {
   constructor(
     parent: HTMLElement | null,
     className: string,
-    options: IDataInputRange,
     param: IParamInputRange,
-    onChange: (id: string, value: string, isLeft: boolean) => void) {
+    onChange: (id: string, value: string, isLeft: boolean) => void,
+    onReset: (id: string, isLeft: boolean) => void) {
     super(parent, 'div', className)
 
     this.param = param
-    const { id, value: {left, right}  } = options
+    const { id, min, max, value } = this.param
+
+    const left = value.left === 'min' ? min : value.left;
+    const right = value.right === 'max' ? max : value.right
 
     this.percentLeft = this.getPercent(+left)
     this.percentRight = this.getPercent(+right)
@@ -33,8 +35,8 @@ class InputDoubleRange extends Control {
     const titleWrap = new Control(this.node, 'div', 'input-range__wrap');
 
     const inputList = [
-      this.inputLeft = new InputRange(this.node, 'input-range__input left', options, this.param),
-      this.inputRight = new InputRange(this.node, 'input-range__input right', options, this.param)
+      this.inputLeft = new InputRange(this.node, 'input-range__input left', this.param, left),
+      this.inputRight = new InputRange(this.node, 'input-range__input right', this.param, right)
     ]
 
     inputList.map((input) => {
@@ -57,8 +59,8 @@ class InputDoubleRange extends Control {
         title.node.style.left = `${percent}%`;
         title.node.textContent = value
 
-
-        onChange(id, value, isLeft)
+        if (value === input.node.max || value === input.node.min) onReset(id, isLeft)
+        else onChange(id, value, isLeft)
       };
 
       input.node.onmouseenter = () => {

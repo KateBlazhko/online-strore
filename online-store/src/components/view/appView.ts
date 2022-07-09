@@ -7,14 +7,12 @@ import Goods from "./goods";
 import Search from "./search";
 import Header from "./header";
 import { IDataItem } from '../model/appModel';
-import { IDataInputRange } from '../app/optionsInputRange';
+import { IParamInputRange } from '../app/optionsInputRange';
 
 class AppView {
   private header: Control
   private main: Control
   private footer: Control
-
-  // private model: AppModel
 
   private filterRange: FilterRange
   private filterValue: FilterValue
@@ -38,11 +36,14 @@ class AppView {
     this.filterRange = new FilterRange (
       settings.node,
       'filter',
-      model.optionsInputRange,
       model.getParamInputRange(),
       (id: keyof IDataItem, value: string, isLeft: boolean) => {
         controller.onInputRangeChange(id, value, isLeft)
-      });
+      },
+      (id: keyof IDataItem, isLeft: boolean) => {
+        controller.onInputRangeReset(id, isLeft)
+      }
+    );
       
     this.filterValue = new FilterValue(settings.node, 'filter');
     this.goods = new Goods(container.node, 'goods');

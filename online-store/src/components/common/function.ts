@@ -15,12 +15,3 @@ export function addClassName(className: string,...elements: HTMLElement[]) {
     element.classList.add(className);
   }
 }
-
-
-export function sorter(arr: Record<string, string>[], param : string, value: string | Record<string, string>) {
-  const pItem = arr.filter(item => typeof value === 'string' ? 
-    item[param] === value : 
-    +item[param] >= +value.left && +item[param] <= +value.right)
-
- return pItem
-}

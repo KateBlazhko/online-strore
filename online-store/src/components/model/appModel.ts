@@ -1,15 +1,10 @@
 import AppState from '../app/appState'
 import { IDataState } from '../app/appState'
-import { IDataInputRange, IParamInputRange, paramInputRange } from '../app/optionsInputRange';
-import * as func from '../common/function'
+import { IParamInputRange, paramInputRange } from '../app/optionsInputRange'
 
 type Value = {
-  left: string, 
-  right: string
-}
-
-type Parametrs = {
-  [key: string]: string | Value
+  left?: string, 
+  right?: string
 }
 
 export interface IDataItem {
@@ -30,7 +25,6 @@ class AppModel {
   private _data: IDataItem[];
   private state: AppState;
   private _dataState: IDataState;
-  public optionsInputRange: IDataInputRange[];
   public renderData: (data: IDataItem[]) => void;
 
   get data(){
@@ -57,7 +51,6 @@ class AppModel {
 
     const onChange = (dataState: IDataState) => {
       this.dataState = dataState
-      this.optionsInputRange = this._dataState.optionsInputRange
     }
 
     this.state.onChange.add(onChange)
@@ -70,27 +63,47 @@ class AppModel {
   }
 
   private filterData(dataState: IDataState) {
-    const filters: Parametrs[] = Object.values(dataState).flat()
     if (this.data) {
 
-      const filterData = filters.reduce((res: IDataItem[], param) => {
-        return this.sorter(res, param.id as keyof IDataItem, param.value)
-      }, this.data)
+      if (dataState) {
 
-      this.renderData(filterData)
+        console.log(dataState)
+        const filters: string[] = Object.keys(dataState)
+
+        const filterData = filters.reduce((res: IDataItem[], param) => {
+
+          return this.sorter(res, param as keyof IDataItem, dataState[param])
+        }, this.data)
+  
+        this.renderData(filterData)
+        
+      } else {
+        this.renderData(this.data)
+      }
+      
     } 
   }
 
-  private sorter(arr: IDataItem[], param : keyof IDataItem, value: string | Value) {
-    const pItem = arr.filter(item => typeof value === 'string' ? 
-      item[param]=== value : 
-      +item[param] >= +value.left && +item[param] <= +value.right)
-  
+  private sorter(arr: IDataItem[], param : keyof IDataItem, value: string[] | Value) {
+    const pItem = arr.filter(item => {
+
+      if (Array.isArray(value)) {
+        return value.length === 0 || value.includes(item[param])
+
+      } else {
+        if (value.left && value.right) return +item[param] >= +value.left && +item[param] <= +value.right
+
+        if (value.left) return  +item[param] >= +value.left
+
+        if (value.right) return +item[param] <= +value.right
+      }
+    })
+    
    return pItem
   }
 
   public getParamInputRange() {
-    const paramList: IParamInputRange[] = this.optionsInputRange.map((input, index) => {
+    const paramList: IParamInputRange[] = paramInputRange.slice().map((input, index) => {
       const id = input.id
       const arrValue = this.data.map(item => {
         return isNaN(parseInt(item[id])) ? 0 : parseInt(item[id])
@@ -98,26 +111,28 @@ class AppModel {
       const min = Math.min(...arrValue).toString();
       const max = Math.max(...arrValue).toString();
 
-      return {
-        ...paramInputRange[index],
-        max: max,
-        min: min,
+      if (this.dataState && this.dataState[id]) {
+        return {
+          ...paramInputRange[index],
+          value: { 
+            ...paramInputRange[index].value,
+            ...this.dataState[id]
+          },
+          max: max,
+          min: min,
+        }
+      } else {
+        return {
+          ...paramInputRange[index],
+          max: max,
+          min: min,
+        }
       }
     })
-
-    this.checkOptionsInputRange(paramList)
     return paramList
 
   }
 
-  private checkOptionsInputRange (paramList: IParamInputRange[]) {
-    this.optionsInputRange = this.optionsInputRange.map((input, index) => {
-      input.value.left = input.value.left === 'min' ? paramList[index].min : input.value.left
-      input.value.right = input.value.right === 'max' ? paramList[index].max : input.value.right
-      return input
-
-    })
-  }
 }
 
 export default AppModel

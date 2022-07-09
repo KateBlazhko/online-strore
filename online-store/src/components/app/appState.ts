@@ -1,18 +1,10 @@
-import { IDataInputRange, optionsInputRange } from './optionsInputRange'
-import { IDataInputValue, optionsInputValue } from './optionsInputValue'
-
 import Signal from '../common/signal'
 
+type Value = string[] | {left?: string, right?: string}
+
 export interface IDataState {
-  optionsInputRange: IDataInputRange[],
-  optionsInputValue: IDataInputValue[]
-
-}
-
-const defaultData: IDataState = {
-  optionsInputRange: optionsInputRange,
-  optionsInputValue: optionsInputValue
-}
+  [key: string]: Value
+} 
 
 export class AppState {
   private _dataState: IDataState;
@@ -23,6 +15,7 @@ export class AppState {
 
   set dataState(value:IDataState){
     this._dataState = value;
+
     this.onChange.emit(this._dataState);
   }
 
@@ -30,9 +23,9 @@ export class AppState {
     let dataState: IDataState;
       try {
         dataState = AppState.load();
-        // dataState = defaultData;
+        // dataState = {};
       } catch(e){
-        dataState = defaultData;
+        dataState = {}
       }
     this._dataState = dataState;
   }

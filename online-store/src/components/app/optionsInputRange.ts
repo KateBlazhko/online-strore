@@ -1,54 +1,42 @@
 import { IDataItem } from '../model/appModel';
 
-export interface IDataInputRange {
-  id: keyof IDataItem,
-  value: {
-    left: string,
-    right: string,
-  }
-}
-
-export const optionsInputRange: IDataInputRange[] = [
-  { 
-    id: 'price',
-    value: {
-      left: 'min',
-      right: 'max',
-    }
-  },
-  {
-    id: 'release',
-    value: {
-      left: 'min',
-      right: 'max',
-    }
-  },
-  {
-    id: 'quantity',
-    value: {
-      left: 'min',
-      right: 'max',
-    }
-  }
-]
-
 export interface IParamInputRange {
   filter: string,
+  id: keyof IDataItem,
   step: string,
   min?: string,
   max?: string,
+  value: {
+    left: string,
+    right: string
+  }
 }
 
 export const paramInputRange: IParamInputRange[] = [{ 
   filter: 'Фильтрация по цене, $',
-  step: '1'
+  id: 'price', 
+  step: '1',
+  value: {
+    left: 'min',
+    right: 'max'
+  }
 },
 {
   filter: 'Фильтрация по году выпуска',
-  step: '1'
+  id: 'release',
+  step: '1',
+  value: {
+    left: 'min',
+    right: 'max'
+  }
 },
 {
   filter: 'Фильтрация по количеству',
-  step: '1'
+  id: 'quantity',
+  step: '1',
+  value: {
+    left: 'min',
+    right: 'max'
+  }
 }
 ]

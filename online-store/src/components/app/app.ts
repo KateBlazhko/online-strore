@@ -11,13 +11,11 @@ class App {
   constructor(state: AppState){
     this.model = new AppModel(state)
     this.controller = new AppController(state)
-    // this.view = new AppView(this.model, this.controller)
   }
 
   public start() {
     this.controller.getData(data => {
       this.model.data = data
-      // const paramList = this.model.getParamInputRange()
       this.view = new AppView(this.model, this.controller)
       this.model.build()
     })
