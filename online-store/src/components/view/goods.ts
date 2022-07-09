@@ -20,11 +20,13 @@ class Goods extends Control {
     if (this.dataList.length > 0) this.dataList.map((dataItem) => dataItem.destroy());
 
     if (data && data.length > 0) {
-      this.text.destroy();
+      this.text && this.text.destroy();
+      this.text = null;
 
       this.draw(data)
     } else {
-      this.text = new Control(this.node, 'h2', 'goods__text', 'Ничего не найдено')
+
+      if (!this.text) this.text = new Control(this.node, 'h2', 'goods__text', 'Ничего не найдено')
     }
   }
 
