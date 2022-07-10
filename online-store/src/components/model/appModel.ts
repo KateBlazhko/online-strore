@@ -34,7 +34,6 @@ class AppModel {
 
   public filterData(dataState: IDataState) {
     const filter: Filter = dataState.filter
-    
     if (this.data) {
 
       if (dataState) {
@@ -43,6 +42,7 @@ class AppModel {
         const filterData = filters.reduce((res: IDataItem[], param) => {
 
           return this.sorter(res, param as keyof IDataItem, filter[param])
+
         }, this.data)
   
         this.renderData(filterData)
@@ -54,19 +54,28 @@ class AppModel {
     } 
   }
 
-  private sorter(arr: IDataItem[], param : keyof IDataItem, value: string[] | Value) {
+  private sorter(arr: IDataItem[], param : keyof IDataItem, value: Value) {
     const pItem = arr.filter(item => {
 
-      if (Array.isArray(value)) {
-        return value.length === 0 || value.includes(item[param])
+      if (('left' in value) || ('right' in value)) {
 
-      } else {
         if (value.left && value.right) return +item[param] >= +value.left && +item[param] <= +value.right
 
         if (value.left) return  +item[param] >= +value.left
 
         if (value.right) return +item[param] <= +value.right
+
+      } else {
+
+        for (const key in value) {
+
+          if (item[param] === key) return true
+
+        }
+
+        return false
       }
+      
     })
     
    return pItem

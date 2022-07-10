@@ -36,15 +36,31 @@ class AppView {
       settings.node,
       'filter',
       controller.getParamInputRange(),
+
       (id: keyof IDataItem, value: string, isLeft: boolean) => {
-        controller.onInputRangeChange(id, value, isLeft)
+        const nameValue = isLeft ? 'left' : 'right'
+        controller.onFilterChange(id, value, nameValue)
       },
+
       (id: keyof IDataItem, isLeft: boolean) => {
-        controller.onInputRangeReset(id, isLeft)
+        const nameValue = isLeft ? 'left' : 'right'
+        controller.onFilterReset(id, nameValue)
       }
     );
       
-    this.filterValue = new FilterValue(settings.node, 'filter');
+    this.filterValue = new FilterValue(
+      settings.node,
+      'filter',
+      controller.getParamInputValue(),
+
+      (id: keyof IDataItem, value: string | boolean, nameValue: string) => {
+        controller.onFilterChange(id, value, nameValue)
+      },
+
+      (id: keyof IDataItem, nameValue: string) => {
+        controller.onFilterReset(id, nameValue)
+      });
+
     this.goods = new Goods(container.node, 'goods');
   }
 

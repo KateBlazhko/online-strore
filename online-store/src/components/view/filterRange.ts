@@ -33,10 +33,6 @@ class FilterRange extends Control {
     })
   }
 
-  private getMax(id: string) {
-
-  }
-
 }
 
 export default FilterRange

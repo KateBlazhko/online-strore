@@ -3,6 +3,8 @@ import AppState from '../model/appState';
 import { IDataState, Value, Filter } from '../model/appState';
 import { IDataItem } from '../model/appModel';
 import { IParamInputRange, paramInputRange } from '../view/optionsInputRange'
+import { IParamInputValue, paramInputValue } from '../view/optionsInputValue'
+
 import AppModel from '../model/appModel'
 
 type Callback<Data> = (data: Data) => void;
@@ -26,6 +28,8 @@ class AppController extends Loader {
   constructor(state: AppState, model: AppModel) {
     super('assets/json/data.json')
     this.state = state
+    this._dataState = this.state.dataState
+    this.filter = this.state.dataState.filter
     this.model = model
 
     const onChange = (dataState: IDataState) => {
@@ -34,8 +38,6 @@ class AppController extends Loader {
     }
 
     this.state.onChange.add(onChange)
-
-    onChange(this.state.dataState)
   }
 
   public getData(callback: Callback<IDataItem[]>): void {
@@ -70,11 +72,9 @@ class AppController extends Loader {
       }
     })
     return paramList
-
   }
 
-  public onInputRangeChange(idValue: keyof IDataItem, value: string, isLeft: boolean) {
-    const nameValue = isLeft ? 'left' : 'right'
+  public onFilterChange(idValue: keyof IDataItem, value: string | boolean, nameValue: string) {
     
     const newFilter: Filter =  this.filter[idValue] ? 
       {
@@ -99,8 +99,7 @@ class AppController extends Loader {
       } 
   }
 
-  public onInputRangeReset(idValue: keyof IDataItem, isLeft: boolean) {
-    const nameValue = isLeft ? 'left' : 'right'
+  public onFilterReset(idValue: keyof IDataItem, nameValue: string) {
 
     const item  = this.filter[idValue]
 
@@ -111,6 +110,61 @@ class AppController extends Loader {
     if (Object.keys(item).length == 0) {
      delete this.filter[idValue]
     }
+
+    this.state.dataState = {
+      ...this.state.dataState
+    }
+  }
+
+  getParamInputValue() {
+    const paramList: IParamInputValue[] = paramInputValue.slice().map((input, index) => {
+      const id = input.id
+
+      const values = this.model.data
+        .reduce((res, item) => {
+
+          if (typeof item[id] === 'boolean') {
+
+          if(res.includes('')) return res
+
+          res.push('')
+
+          return res
+        }  
+
+        if(res.includes(item[id])) return res
+
+        res.push(item[id])
+        return res
+
+      }, [])
+        .reduce((obj,item) => {
+          return {
+            ...obj,
+            [item]: false
+          }
+        }, {})
+
+      if (this.dataState && this.filter[id]) {
+        return {
+          ...paramInputValue[index],
+          value: { 
+            ...paramInputValue[index].value,
+            ...values,
+            ...this.filter[id]
+          }
+        }
+      } else {
+        return {
+          ...paramInputValue[index],
+          value: { 
+            ...paramInputValue[index].value,
+            ...values,
+          }
+        }
+      }
+    })
+    return paramList
   }
 }
 

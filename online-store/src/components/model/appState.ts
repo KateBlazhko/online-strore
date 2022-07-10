@@ -1,6 +1,8 @@
 import Signal from '../common/signal'
 
-export type Value = string[] | {left?: string, right?: string}
+export type Value = {
+  [key: string]: string | boolean
+}
 
 export type Filter = { 
   [key: string]: Value

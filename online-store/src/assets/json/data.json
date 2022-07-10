@@ -9,7 +9,7 @@
     "other": "8 pin x1",
     "price": "1200",
     "release": "2020",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   },
   {
@@ -22,7 +22,7 @@
     "other": "8 pin x2",
     "price": "1300",
     "release": "2019",
-    "popular": "false",
+    "popular": false,
     "quantity": "10"
   },
   {
@@ -35,7 +35,7 @@
     "other": "8 pin x3",
     "price": "3000",
     "release": "2020",
-    "popular": "true",
+    "popular": true,
     "quantity": "1"
   },
   {
@@ -48,7 +48,7 @@
     "other": "8 pin x1",
     "price": "1500",
     "release": "2021",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   },
   {
@@ -61,7 +61,7 @@
     "other": "8 pin x1",
     "price": "500",
     "release": "2019",
-    "popular": "false",
+    "popular": false,
     "quantity": "10"
   },
   {
@@ -74,7 +74,7 @@
     "other": "8 pin x2",
     "price": "800",
     "release": "2016",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   },
   {
@@ -87,7 +87,7 @@
     "other": "8 pin x2",
     "price": "1800",
     "release": "2020",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   },
   {
@@ -100,7 +100,7 @@
     "other": "8 pin x1",
     "price": "550",
     "release": "2019",
-    "popular": "false",
+    "popular": false,
     "quantity": "10"
   },
   {
@@ -113,7 +113,7 @@
     "other": "8 pin x1",
     "price": "1300",
     "release": "2020",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   },
   {
@@ -126,7 +126,7 @@
     "other": "8 pin x2",
     "price": "1000",
     "release": "2019",
-    "popular": "false",
+    "popular": false,
     "quantity": "10"
   },
   {
@@ -139,7 +139,7 @@
     "other": "8 pin x1",
     "price": "1300",
     "release": "2021",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   },
   {
@@ -152,7 +152,7 @@
     "other": "8 pin x2",
     "price": "1300",
     "release": "2021",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   },
   {
@@ -165,7 +165,7 @@
     "other": "8 pin x1",
     "price": "500",
     "release": "2017",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   },
   {
@@ -178,7 +178,7 @@
     "other": "8 pin x2",
     "price": "700",
     "release": "2018",
-    "popular": "false",
+    "popular": false,
     "quantity": "10"
   },
   {
@@ -191,7 +191,7 @@
     "other": "6+8 pin x1",
     "price": "500",
     "release": "2017",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   },
   {
@@ -204,7 +204,7 @@
     "other": "6+8 pin x1",
     "price": "550",
     "release": "2017",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   },
   {
@@ -217,7 +217,7 @@
     "other": "6+8 pin x1",
     "price": "550",
     "release": "2017",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   },
   {
@@ -230,7 +230,7 @@
     "other": "8 pin x2",
     "price": "700",
     "release": "2018",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   },
   {
@@ -243,7 +243,7 @@
     "other": "6+8 pin x1",
     "price": "1500",
     "release": "2021",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   },
   {
@@ -256,7 +256,7 @@
     "other": "8 pin x2",
     "price": "2000",
     "release": "2021",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   },
   {
@@ -269,7 +269,7 @@
     "other": "8 pin x2",
     "price": "1500",
     "release": "2021",
-    "popular": "true",
+    "popular": true,
     "quantity": "10"
   }
 ]

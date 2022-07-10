@@ -2,21 +2,27 @@ import { IDataItem } from '../model/appModel';
 
 export interface IParamInputValue {
   filter: string,
-  step: string,
-  min?: string,
-  max?: string,
+  id: keyof IDataItem,
+  value?: {
+    [key: string]: string | boolean
+  }
 }
 
-export const paramInputRange: IParamInputValue[] = [{ 
-  filter: 'Фильтрация по цене, $',
-  step: '1'
-},
-{
-  filter: 'Фильтрация по году выпуска',
-  step: '1'
-},
-{
-  filter: 'Фильтрация по количеству',
-  step: '1'
-}
+export const paramInputValue: IParamInputValue[] = [
+  { 
+    filter: 'Чипмейкер',
+    id: 'chipmaker'
+  },
+  {
+    filter: 'Производитель',
+    id: 'vendor'
+  },
+  {
+    filter: 'Графический процессор',
+    id: 'gpu'
+  },
+  {
+    filter: 'Популярный товар',
+    id: 'popular'
+  }
 ]

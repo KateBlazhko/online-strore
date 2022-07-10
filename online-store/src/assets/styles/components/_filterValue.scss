@@ -1,0 +1,17 @@
+.filter-value {
+  width: 100%;
+
+  &__input {
+    @include flex();
+    flex-wrap: wrap;
+  }
+
+  &__checkbox {
+    align-self: end;
+    width: 10%;
+  }
+
+  &__label {
+    width: 90%;
+  }
+}

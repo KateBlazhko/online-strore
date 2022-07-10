@@ -1,6 +1,8 @@
 import Control from '../common/control';
-import InputRange from '../common/inputRange';
+import InputRange from './inputRange';
 import { IParamInputRange, paramInputRange } from './optionsInputRange'
+import Marker from './marker'
+import Label from './label'
 
 class InputDoubleRange extends Control {
   public static id: number;
@@ -42,29 +44,25 @@ class InputDoubleRange extends Control {
     inputList.map((input) => {
       const isLeft: boolean = input.node.classList.contains('left');
 
-      const label = new Control<HTMLLabelElement>(this.node, 'label', 'input-range__label', input.node.value)
-      label.node.htmlFor = input.node.id
+      const label = new Label(this.node,'input-range__label', input.node.value, input.node.id)
 
-      const title = new Control(titleWrap.node, 'div', 'input-range__title', input.node.value);
       const percent = isLeft ? this.percentLeft : this.percentRight
-      title.node.style.left = `${percent}%`;
+      const marker = new Marker(titleWrap.node, 'input-range__title', input.node.value, percent);
 
       input.node.oninput = () => {
         const value = this.update(input);
-        this.setPercent(input, isLeft);
+        const percentNew = this.setPercent(input, percent, isLeft);
 
-        label.node.textContent = value
+        label.onChange(value);
 
-        const percent = isLeft ? this.percentLeft : this.percentRight
-        title.node.style.left = `${percent}%`;
-        title.node.textContent = value
+        marker.onChange(percentNew, value);
 
         if (value === input.node.max || value === input.node.min) onReset(id, isLeft)
         else onChange(id, value, isLeft)
       };
 
       input.node.onmouseenter = () => {
-        title.node.style.opacity= '1';
+        marker.onHide()
         
         if (isLeft) {
           this.inputLeft.node.style.zIndex = '3';
@@ -76,7 +74,7 @@ class InputDoubleRange extends Control {
       }
 
       input.node.onmouseleave = () => {
-        title.node.style.opacity= '0';
+        marker.onHide()
       }
     })
   }
@@ -86,16 +84,17 @@ class InputDoubleRange extends Control {
     return ((value - +min) / (+max - +min)) * 100;
   }
 
-  private setPercent(input: InputRange, isLeft: boolean) {
+  private setPercent(input: InputRange, percent: number, isLeft: boolean) {
     const value = +input.node.value;
-    
-    if (isLeft) {
-      this.percentLeft = this.getPercent(value)
-    } else {
-      this.percentRight = this.getPercent(value)
-    }
+ 
+    percent = this.getPercent(value)
 
+    if (isLeft) this.percentLeft = percent
+    else this.percentRight = percent
     this.setTrackColor()
+
+    return percent
+   
   }
 
   private setTrackColor() {

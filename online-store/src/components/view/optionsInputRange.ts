@@ -13,7 +13,7 @@ export interface IParamInputRange {
 }
 
 export const paramInputRange: IParamInputRange[] = [{ 
-  filter: 'Фильтрация по цене, $',
+  filter: 'Фильтрация по цене, бел.руб',
   id: 'price', 
   step: '1',
   value: {
