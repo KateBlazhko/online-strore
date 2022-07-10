@@ -7,7 +7,6 @@ import Goods from "./goods";
 import Search from "./search";
 import Header from "./header";
 import { IDataItem } from '../model/appModel';
-import { IParamInputRange } from '../app/optionsInputRange';
 
 class AppView {
   private header: Control
@@ -36,7 +35,7 @@ class AppView {
     this.filterRange = new FilterRange (
       settings.node,
       'filter',
-      model.getParamInputRange(),
+      controller.getParamInputRange(),
       (id: keyof IDataItem, value: string, isLeft: boolean) => {
         controller.onInputRangeChange(id, value, isLeft)
       },

@@ -1,6 +1,6 @@
 import Control from '../common/control';
 import InputRange from '../common/inputRange';
-import { IParamInputRange, paramInputRange } from '../app/optionsInputRange'
+import { IParamInputRange, paramInputRange } from './optionsInputRange'
 
 class InputDoubleRange extends Control {
   public static id: number;

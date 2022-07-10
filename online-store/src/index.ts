@@ -1,5 +1,5 @@
 import App from './components/app/app';
-import { AppState } from './components/app/appState';
+import { AppState } from './components/model/appState';
 import './style.scss';
 
 const appState = new AppState()

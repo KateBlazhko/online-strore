@@ -38,5 +38,4 @@ export const paramInputRange: IParamInputRange[] = [{
     left: 'min',
     right: 'max'
   }
-}
-]
+}]

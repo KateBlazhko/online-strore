@@ -1,5 +1,5 @@
 import Control from "../common/control";
-import { IParamInputRange } from '../app/optionsInputRange';
+import { IParamInputRange } from './optionsInputRange';
 import InputDoubleRange from './inputDRange'
 
 class FilterRange extends Control {

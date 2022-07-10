@@ -1,9 +1,16 @@
 import Signal from '../common/signal'
 
-type Value = string[] | {left?: string, right?: string}
+export type Value = string[] | {left?: string, right?: string}
+
+export type Filter = { 
+  [key: string]: Value
+}
 
 export interface IDataState {
-  [key: string]: Value
+  sorter: {
+    [key: string]: boolean
+  },
+  filter: Filter
 } 
 
 export class AppState {
@@ -23,9 +30,12 @@ export class AppState {
     let dataState: IDataState;
       try {
         dataState = AppState.load();
-        // dataState = {};
+        // dataState = { sorter: {}, filter: {} }
       } catch(e){
-        dataState = {}
+        dataState = {
+          sorter: {},
+          filter: {}
+        }
       }
     this._dataState = dataState;
   }

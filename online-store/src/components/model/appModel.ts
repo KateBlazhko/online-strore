@@ -1,11 +1,5 @@
-import AppState from '../app/appState'
-import { IDataState } from '../app/appState'
-import { IParamInputRange, paramInputRange } from '../app/optionsInputRange'
-
-type Value = {
-  left?: string, 
-  right?: string
-}
+import AppState from './appState'
+import { IDataState, Filter, Value } from './appState'
 
 export interface IDataItem {
   image: string,
@@ -23,8 +17,6 @@ export interface IDataItem {
 
 class AppModel {
   private _data: IDataItem[];
-  private state: AppState;
-  private _dataState: IDataState;
   public renderData: (data: IDataItem[]) => void;
 
   get data(){
@@ -35,44 +27,22 @@ class AppModel {
     this._data = value;
   }
 
-  get dataState(){
-    return this._dataState;
-  }
-
-  set dataState(value:IDataState){
-    this._dataState = value;
-
-    this.filterData(this._dataState)
-  }
-
-  constructor(state: AppState) {
+  constructor() {
     this._data = null
-    this.state = state
-
-    const onChange = (dataState: IDataState) => {
-      this.dataState = dataState
-    }
-
-    this.state.onChange.add(onChange)
-
-    onChange(this.state.dataState)
   }
 
-  public build(){
-    this.filterData(this.dataState);
-  }
 
-  private filterData(dataState: IDataState) {
+  public filterData(dataState: IDataState) {
+    const filter: Filter = dataState.filter
+    
     if (this.data) {
 
       if (dataState) {
-
-        console.log(dataState)
-        const filters: string[] = Object.keys(dataState)
+        const filters: string[] = Object.keys(filter)
 
         const filterData = filters.reduce((res: IDataItem[], param) => {
 
-          return this.sorter(res, param as keyof IDataItem, dataState[param])
+          return this.sorter(res, param as keyof IDataItem, filter[param])
         }, this.data)
   
         this.renderData(filterData)
@@ -100,37 +70,6 @@ class AppModel {
     })
     
    return pItem
-  }
-
-  public getParamInputRange() {
-    const paramList: IParamInputRange[] = paramInputRange.slice().map((input, index) => {
-      const id = input.id
-      const arrValue = this.data.map(item => {
-        return isNaN(parseInt(item[id])) ? 0 : parseInt(item[id])
-      })
-      const min = Math.min(...arrValue).toString();
-      const max = Math.max(...arrValue).toString();
-
-      if (this.dataState && this.dataState[id]) {
-        return {
-          ...paramInputRange[index],
-          value: { 
-            ...paramInputRange[index].value,
-            ...this.dataState[id]
-          },
-          max: max,
-          min: min,
-        }
-      } else {
-        return {
-          ...paramInputRange[index],
-          max: max,
-          min: min,
-        }
-      }
-    })
-    return paramList
-
   }
 
 }

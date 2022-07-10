@@ -3,10 +3,6 @@ enum Status {
   'Not Found' = 404,
 }
 
-type OptionsUrl = {
-  [key: string]: string;
-};
-
 class Loader {
   private baseLink: string;
 
@@ -14,12 +10,20 @@ class Loader {
       this.baseLink = baseLink;
   }
 
-  public getResp<Data>(
+  public load<Data>(
       callback: (data: Data) => void = () => {
           console.error('No callback for GET response');
       }
   ): void {
-      this.load<Data>(callback);
+
+    fetch(this.baseLink)
+          .then(Loader.errorHandler.bind(Loader))
+          .then((res) => {
+              const data = res.json() as Promise<Data>;
+              return data;
+          })
+          .then((data: Data) => callback(data))
+          .catch((err: Error) => console.error(err));
   }
 
   private static errorHandler(res: Response): Response {
@@ -31,20 +35,6 @@ class Loader {
       }
 
       return res;
-  }
-
-
-  private load<Data>(
-      callback: (data: Data) => void
-  ): void {
-      fetch(this.baseLink)
-          .then(Loader.errorHandler.bind(Loader))
-          .then((res) => {
-              const data = res.json() as Promise<Data>;
-              return data;
-          })
-          .then((data: Data) => callback(data))
-          .catch((err: Error) => console.error(err));
   }
 }
 

@@ -1,7 +1,10 @@
 import Control from '../common/control';
-import { IParamInputRange } from '../app/optionsInputRange'
+import { IParamInputRange } from '../view/optionsInputRange'
 
 class InputRange extends Control<HTMLInputElement> {
+  public parent: HTMLElement | null;
+  public className: string;
+    
   constructor(
     parent: HTMLElement | null,
     className: string,
@@ -11,7 +14,7 @@ class InputRange extends Control<HTMLInputElement> {
 
       const isLeft: boolean = this.node.classList.contains('left');
 
-      const { id, min, max, step, value: {left, right} } = param
+      const { id, min, max, step } = param
 
       this.node.type = 'range';
       this.node.min = min;
