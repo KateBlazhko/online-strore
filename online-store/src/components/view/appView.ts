@@ -1,6 +1,7 @@
 import Control from "../common/control";
 import AppModel from '../model/appModel';
 import AppController from '../controller/appController';
+import Sorter from './sorter'
 import FilterRange from "./filterRange";
 import FilterValue from "./filterValue";
 import Goods from "./goods";
@@ -13,6 +14,7 @@ class AppView {
   private main: Control
   private footer: Control
 
+  private sorter: Sorter;
   private filterRange: FilterRange
   private filterValue: FilterValue
   private search: Search
@@ -32,6 +34,18 @@ class AppView {
       this.drawGoods(data)
     }
 
+    this.sorter = new Sorter (
+      settings.node,
+      'sorter',
+      controller.getParamSorter(),
+      
+      (id: string) => {
+        controller.onSorterChange(id)
+      })
+
+
+    const title = new Control(settings.node, 'h2', 'title', 'Filter by')
+  
     this.filterRange = new FilterRange (
       settings.node,
       'filter',

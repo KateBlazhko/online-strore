@@ -8,6 +8,7 @@ class Marker extends Control {
     super(parent, 'div', className, content)
 
     this.node.style.left = `${percent}%`;
+    this.node.style.opacity = '0'
   }
 
   onChange(percent: number, value: string) {

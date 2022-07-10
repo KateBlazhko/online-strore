@@ -9,9 +9,9 @@ class Goods extends Control {
 
   constructor(parent: HTMLElement | null, className: string) {
     super(parent, 'div', className)
-    const title = new Control(this.node, 'h2', 'title', 'Товары')
+    const title = new Control(this.node, 'h2', 'title', 'Our goods for you')
 
-    this.text = new Control(this.node, 'h2', 'goods__text', 'Ничего не найдено')
+    this.text = new Control(this.node, 'h2', 'goods__text', 'Sorry, nothing found...')
     this.cardWrap = new Control(this.node, 'div', 'goods__card-wrapper')
     this.dataList = []
   }
@@ -31,6 +31,7 @@ class Goods extends Control {
   }
 
   private draw(data: IDataItem[]) {
+    this.dataList = []
     data.map((dataItem, index) => this.dataList.push(new Card(this.cardWrap.node, 'card', index, dataItem)))
   }
 

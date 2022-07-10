@@ -20,9 +20,10 @@ export class Card extends Control {
       img.node.style.backgroundImage= `url(./assets/img/${this.data.image})`;
 
       const model = new Control(this.node, 'div','card__name', this.data.model);
-      const button = new Control(this.node, 'div', 'card__button', 'Положить в корзину');
+      const buttonDetails = new Control(this.node, 'div', 'card__button', 'View details');
+      const buttonCart = new Control(this.node, 'div', 'card__button', 'Add to cart');
     
-      img.node.onclick = () => {
+      buttonDetails.node.onclick = () => {
        document.body.style.overflow = 'hidden';   
        document.body.style.marginRight = `${this.getScrollWidth()}px`       
           const popup = new Popup (document.documentElement, 'popup', data)
@@ -33,7 +34,7 @@ export class Card extends Control {
           }
       }
 
-      button.node.onclick = () => {
+      buttonCart.node.onclick = () => {
         console.log('hhh')
       }
     }

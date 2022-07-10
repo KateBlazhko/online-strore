@@ -1,6 +1,6 @@
 import Control from "../common/control";
-import { IParamInputValue } from './optionsInputValue'
-import InputMultipleValue from './inputMValue'
+import { IParamInputValue } from './options/optionsInputValue'
+import InputMultipleValue from './inputValue'
 
 class FilterValue extends Control {
   constructor(
@@ -12,7 +12,7 @@ class FilterValue extends Control {
 
     super(parent, 'div', className)
 
-    const title = new Control(this.node, 'h2', 'title', 'Фильтрация по значениям')
+    // const title = new Control(this.node, 'h2', 'title', 'Фильтрация по значениям')
 
     const filterValue = [
       new Control(this.node, 'div', 'filter-value'),

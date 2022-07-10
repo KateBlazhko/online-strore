@@ -1,4 +1,4 @@
-import { IDataItem } from '../model/appModel';
+import { IDataItem } from '../../model/appModel';
 
 export interface IParamInputValue {
   filter: string,
@@ -10,19 +10,19 @@ export interface IParamInputValue {
 
 export const paramInputValue: IParamInputValue[] = [
   { 
-    filter: 'Чипмейкер',
+    filter: 'Chipmaker',
     id: 'chipmaker'
   },
   {
-    filter: 'Производитель',
+    filter: 'Vendor',
     id: 'vendor'
   },
   {
-    filter: 'Графический процессор',
+    filter: 'GPU',
     id: 'gpu'
   },
   {
-    filter: 'Популярный товар',
+    filter: 'Popular',
     id: 'popular'
   }
 ]

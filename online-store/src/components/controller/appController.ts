@@ -1,9 +1,10 @@
 import Loader from './loader';
 import AppState from '../model/appState';
-import { IDataState, Value, Filter } from '../model/appState';
+import { IDataState, Filter, Sorter } from '../model/appState';
 import { IDataItem } from '../model/appModel';
-import { IParamInputRange, paramInputRange } from '../view/optionsInputRange'
-import { IParamInputValue, paramInputValue } from '../view/optionsInputValue'
+import { IParamInputRange, paramInputRange } from '../view/options/optionsInputRange'
+import { IParamInputValue, paramInputValue } from '../view/options/optionsInputValue'
+import { IParamSorter, paramSorter } from '../view/options/optionsSorter'
 
 import AppModel from '../model/appModel'
 
@@ -12,6 +13,7 @@ type Callback<Data> = (data: Data) => void;
 class AppController extends Loader {
   private state: AppState;
   private filter: Filter;
+  private sorter: Sorter;
   private model: AppModel;
   private _dataState: IDataState
 
@@ -21,7 +23,6 @@ class AppController extends Loader {
 
   set dataState(value: IDataState){
     this._dataState = value;
-
     this.model.filterData(this._dataState)
   }
 
@@ -30,11 +31,13 @@ class AppController extends Loader {
     this.state = state
     this._dataState = this.state.dataState
     this.filter = this.state.dataState.filter
+    this.sorter = this.state.dataState.sorter
     this.model = model
 
     const onChange = (dataState: IDataState) => {
       this.dataState = dataState
       this.filter = this.state.dataState.filter
+      this.sorter = this.state.dataState.sorter
     }
 
     this.state.onChange.add(onChange)
@@ -42,6 +45,30 @@ class AppController extends Loader {
 
   public getData(callback: Callback<IDataItem[]>): void {
     super.load<IDataItem[]>(callback);
+  }
+
+  public getParamSorter () {
+    if (this.dataState && Object.keys(this.sorter).length > 0) {
+
+      const key = Object.getOwnPropertyNames(this.sorter)[0]
+
+      return {
+        ...paramSorter,
+        [key]: true
+      }
+    }
+
+    return paramSorter
+  }
+
+  public onSorterChange (id: string) {
+    this.state.dataState = {
+      ...this.state.dataState,
+
+      sorter: {
+        [id]: true
+      }
+    } 
   }
 
   public getParamInputRange() {

@@ -1,28 +1,39 @@
 import Control from '../common/control';
+import { IParamInputValue } from './options/optionsInputValue';
+import InputControl from './inputControl';
+import Label from './label';
 
-class InputValue extends Control<HTMLInputElement> {
+class InputMultipleValue extends Control {
   public parent: HTMLElement | null;
   public className: string;
-  public onInput: (checked: boolean) => void
     
-  constructor (
+  constructor(
     parent: HTMLElement | null,
     className: string,
-    name: string,
-    id: string,
-    checked: boolean ){
-    super(parent, 'input', className)
+    param: IParamInputValue,
+    onChange: (id: string, value: boolean, nameValue: string) => void,
+    onReset: (id: string, nameValue: string) => void)  {
+    super(parent, 'div', className)
 
-      this.node.type = 'checkbox';
-      this.node.id = id
-      this.node.name = name;
-      this.node.value = id;
-      this.node.checked = checked
+    const { id, value } = param
 
-      this.node.oninput = () => {
-        this.onInput(this.node.checked)
+    for (const key in value) {
+       const checked = value[key]
+
+      if (typeof checked === 'boolean') {
+        const input = new InputControl (this.node, 'filter-value__checkbox', 'checkbox', id, key, checked)
+
+        input.onInput = (checked: boolean) => {
+          if (checked) onChange (id, checked, key)
+          else onReset (id, key)
+        }
+
+        const label = new Label (this.node, 'filter-value__label', key, id)
       }
+    }
+
+
   }
 }
 
-export default InputValue
+export default InputMultipleValue

@@ -1,5 +1,5 @@
 import Control from "../common/control";
-import { IParamInputRange } from './optionsInputRange';
+import { IParamInputRange } from './options/optionsInputRange';
 import InputDoubleRange from './inputDRange'
 
 class FilterRange extends Control {
@@ -12,8 +12,6 @@ class FilterRange extends Control {
     onReset: (id: string, isLeft: boolean) => void) {
 
     super(parent, 'div', className)
-
-    const title = new Control(this.node, 'h2', 'title', 'Фильтрация по диапазону')
 
     const filterRange = [
       new Control(this.node, 'div', 'filter-range'),

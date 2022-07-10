@@ -4,14 +4,16 @@ export type Value = {
   [key: string]: string | boolean
 }
 
+export type Sorter = {
+  [key: string]: boolean
+}
+
 export type Filter = { 
   [key: string]: Value
 }
 
 export interface IDataState {
-  sorter: {
-    [key: string]: boolean
-  },
+  sorter: Sorter,
   filter: Filter
 } 
 

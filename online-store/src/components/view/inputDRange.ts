@@ -1,6 +1,6 @@
 import Control from '../common/control';
 import InputRange from './inputRange';
-import { IParamInputRange, paramInputRange } from './optionsInputRange'
+import { IParamInputRange, paramInputRange } from './options/optionsInputRange'
 import Marker from './marker'
 import Label from './label'
 

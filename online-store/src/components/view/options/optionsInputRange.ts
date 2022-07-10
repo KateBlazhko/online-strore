@@ -1,4 +1,4 @@
-import { IDataItem } from '../model/appModel';
+import { IDataItem } from '../../model/appModel';
 
 export interface IParamInputRange {
   filter: string,
@@ -13,7 +13,7 @@ export interface IParamInputRange {
 }
 
 export const paramInputRange: IParamInputRange[] = [{ 
-  filter: 'Фильтрация по цене, бел.руб',
+  filter: 'Price',
   id: 'price', 
   step: '1',
   value: {
@@ -22,7 +22,7 @@ export const paramInputRange: IParamInputRange[] = [{
   }
 },
 {
-  filter: 'Фильтрация по году выпуска',
+  filter: 'Year',
   id: 'release',
   step: '1',
   value: {
@@ -31,7 +31,7 @@ export const paramInputRange: IParamInputRange[] = [{
   }
 },
 {
-  filter: 'Фильтрация по количеству',
+  filter: 'Count',
   id: 'quantity',
   step: '1',
   value: {
