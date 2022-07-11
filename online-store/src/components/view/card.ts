@@ -25,15 +25,10 @@ export class Card extends Control {
     const buttonDetails = new Control(
       this.node,
       "div",
-      "card__button",
+      "button",
       "View details"
     );
-    const buttonCart = new Control(
-      this.node,
-      "div",
-      "card__button",
-      "Add to cart"
-    );
+    const buttonCart = new Control(this.node, "div", "button", "Add to cart");
 
     buttonDetails.node.onclick = () => {
       document.body.style.overflow = "hidden";

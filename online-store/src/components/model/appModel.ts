@@ -16,7 +16,7 @@ export interface IDataItem {
 
 class AppModel {
   private _data: IDataItem[];
-  public renderData: (data: IDataItem[]) => void;
+  public renderData: (data: readonly IDataItem[]) => void;
 
   get data() {
     return this._data;
@@ -71,20 +71,17 @@ class AppModel {
     return pItem;
   }
 
-  private sortData(data: IDataItem[], dataState: IDataState) {
+  private sortData(data: readonly IDataItem[], dataState: IDataState) {
     const sorter = dataState.sorter;
-
+    const sortData = data.slice()
     if (Object.keys(sorter).length > 0) {
       const key = Object.getOwnPropertyNames(sorter)[0];
 
-      // const id = key.replace(/([\w\s-]*)\.(\w*)\.(\w*)/, '$2') as keyof IDataItem
       const id = key.split(".")[1] as keyof IDataItem;
-
-      // const isUp = key.replace(/([\w\s-]*)\.(\w*)\.(\w*)/, '$3') === 'up' ? true : false
       const isUp = key.split(".")[2] === "up" ? true : false;
 
       if (isUp) {
-        const sortData = data.sort((a, b) => {
+        sortData.sort((a, b) => {
           if (a[id] > b[id]) return 1;
           if (a[id] == b[id]) return 0;
           if (a[id] < b[id]) return -1;
@@ -92,8 +89,9 @@ class AppModel {
         });
 
         this.renderData(sortData);
+
       } else {
-        const sortData = data.sort((a, b) => {
+        sortData.sort((a, b) => {
           if (a[id] < b[id]) return 1;
           if (a[id] == b[id]) return 0;
           if (a[id] > b[id]) return -1;
@@ -102,9 +100,9 @@ class AppModel {
 
         this.renderData(sortData);
       }
+    } else {
+      this.renderData(data);
     }
-
-    this.renderData(data);
   }
 }
 

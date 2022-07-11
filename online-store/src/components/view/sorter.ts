@@ -20,7 +20,6 @@ class Sorter extends Control {
 
     for (const key in paramSorter) {
       const checked: boolean = param[key];
-      // const id = key.replace(/([\w\s-]*)\.\w*\.\w*/, '$1')
       const id = key.split(".")[0];
       const input = new InputControl(
         sorterWrap.node,

@@ -21,7 +21,7 @@ class Goods extends Control {
     this.dataList = [];
   }
 
-  public update(data: IDataItem[] | null) {
+  public update(data: readonly IDataItem[]) {
     if (this.dataList.length > 0)
       this.dataList.map((dataItem) => dataItem.destroy());
 
@@ -41,7 +41,7 @@ class Goods extends Control {
     }
   }
 
-  private draw(data: IDataItem[]) {
+  private draw(data: readonly IDataItem[]) {
     this.dataList = [];
     data.map((dataItem, index) =>
       this.dataList.push(new Card(this.cardWrap.node, "card", index, dataItem))

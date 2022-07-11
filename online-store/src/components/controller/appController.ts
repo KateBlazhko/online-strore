@@ -2,6 +2,7 @@ import Loader from "./loader";
 import AppState from "../model/appState";
 import { IDataState, Filter, Sorter } from "../model/appState";
 import { IDataItem } from "../model/appModel";
+import { IParamInputRange } from "../view/options/optionsInputRange";
 import { paramInputRange } from "../view/options/optionsInputRange";
 import { IParamInputValue } from "../view/options/optionsInputValue";
 import { paramInputValue } from "../view/options/optionsInputValue";
@@ -26,6 +27,9 @@ class AppController extends Loader {
   set dataState(value: IDataState) {
     this._dataState = value;
     this.model.filterData(this._dataState);
+    // this.getParamSorter();
+    // this.getParamInputRange();
+    // this.getParamInputValue();
   }
 
   constructor(state: AppState, model: AppModel) {
@@ -49,6 +53,18 @@ class AppController extends Loader {
     super.load<IDataItem[]>(callback);
   }
 
+  public onReset() {
+    this.state.dataState = { 
+      ...this.state.dataState,
+      filter: {} };
+  }
+
+  public onResetAll() {
+    this.state.dataState = { 
+      sorter: {},
+      filter: {} };
+  }
+
   public getParamSorter() {
     if (this.dataState && Object.keys(this.sorter).length > 0) {
       const key = Object.getOwnPropertyNames(this.sorter)[0];
@@ -57,8 +73,8 @@ class AppController extends Loader {
         ...paramSorter,
         [key]: true,
       };
-    }
-
+    } 
+    console.log(paramSorter)
     return paramSorter;
   }
 
