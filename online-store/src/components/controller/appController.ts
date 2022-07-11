@@ -1,12 +1,14 @@
-import Loader from './loader';
-import AppState from '../model/appState';
-import { IDataState, Filter, Sorter } from '../model/appState';
-import { IDataItem } from '../model/appModel';
-import { IParamInputRange, paramInputRange } from '../view/options/optionsInputRange'
-import { IParamInputValue, paramInputValue } from '../view/options/optionsInputValue'
-import { IParamSorter, paramSorter } from '../view/options/optionsSorter'
+import Loader from "./loader";
+import AppState from "../model/appState";
+import { IDataState, Filter, Sorter } from "../model/appState";
+import { IDataItem } from "../model/appModel";
+import { paramInputRange } from "../view/options/optionsInputRange";
+import { IParamInputValue } from "../view/options/optionsInputValue";
+import { paramInputValue } from "../view/options/optionsInputValue";
+import { paramSorter } from "../view/options/optionsSorter";
+import { Value } from "../model/appState";
 
-import AppModel from '../model/appModel'
+import AppModel from "../model/appModel";
 
 type Callback<Data> = (data: Data) => void;
 
@@ -15,184 +17,184 @@ class AppController extends Loader {
   private filter: Filter;
   private sorter: Sorter;
   private model: AppModel;
-  private _dataState: IDataState
+  private _dataState: IDataState;
 
-  get dataState(){
+  get dataState() {
     return this._dataState;
   }
 
-  set dataState(value: IDataState){
+  set dataState(value: IDataState) {
     this._dataState = value;
-    this.model.filterData(this._dataState)
+    this.model.filterData(this._dataState);
   }
 
   constructor(state: AppState, model: AppModel) {
-    super('assets/json/data.json')
-    this.state = state
-    this._dataState = this.state.dataState
-    this.filter = this.state.dataState.filter
-    this.sorter = this.state.dataState.sorter
-    this.model = model
+    super("assets/json/data.json");
+    this.state = state;
+    this._dataState = this.state.dataState;
+    this.filter = this.state.dataState.filter;
+    this.sorter = this.state.dataState.sorter;
+    this.model = model;
 
     const onChange = (dataState: IDataState) => {
-      this.dataState = dataState
-      this.filter = this.state.dataState.filter
-      this.sorter = this.state.dataState.sorter
-    }
+      this.dataState = dataState;
+      this.filter = this.state.dataState.filter;
+      this.sorter = this.state.dataState.sorter;
+    };
 
-    this.state.onChange.add(onChange)
+    this.state.onChange.add(onChange);
   }
 
   public getData(callback: Callback<IDataItem[]>): void {
     super.load<IDataItem[]>(callback);
   }
 
-  public getParamSorter () {
+  public getParamSorter() {
     if (this.dataState && Object.keys(this.sorter).length > 0) {
-
-      const key = Object.getOwnPropertyNames(this.sorter)[0]
+      const key = Object.getOwnPropertyNames(this.sorter)[0];
 
       return {
         ...paramSorter,
-        [key]: true
-      }
+        [key]: true,
+      };
     }
 
-    return paramSorter
+    return paramSorter;
   }
 
-  public onSorterChange (id: string) {
+  public onSorterChange(id: string) {
     this.state.dataState = {
       ...this.state.dataState,
 
       sorter: {
-        [id]: true
-      }
-    } 
+        [id]: true,
+      },
+    };
   }
 
   public getParamInputRange() {
-    const paramList: IParamInputRange[] = paramInputRange.slice().map((input, index) => {
-      const id = input.id
-      const arrValue = this.model.data.map(item => {
-        return isNaN(parseInt(item[id])) ? 0 : parseInt(item[id])
-      })
+    const paramList = paramInputRange.slice().map((input, index) => {
+      const id = input.id;
+      const arrValue = this.model.data.map((item) => {
+        return isNaN(parseInt(item[id])) ? 0 : parseInt(item[id]);
+      });
       const min = Math.min(...arrValue).toString();
       const max = Math.max(...arrValue).toString();
 
       if (this.dataState && this.filter[id]) {
         return {
           ...paramInputRange[index],
-          value: { 
+          value: {
             ...paramInputRange[index].value,
-            ...this.filter[id]
+            ...this.filter[id],
           },
           max: max,
           min: min,
-        }
+        };
       } else {
         return {
           ...paramInputRange[index],
           max: max,
           min: min,
-        }
+        };
       }
-    })
-    return paramList
+    });
+    return paramList;
   }
 
-  public onFilterChange(idValue: keyof IDataItem, value: string | boolean, nameValue: string) {
-    
-    const newFilter: Filter =  this.filter[idValue] ? 
-      {
-        [idValue]: {
-           ...this.filter[idValue],
-           [nameValue]: value
+  public onFilterChange(
+    idValue: string,
+    value: string | boolean,
+    nameValue: string
+  ) {
+    const newFilter: Filter = this.filter[idValue]
+      ? {
+          [idValue]: {
+            ...this.filter[idValue],
+            [nameValue]: value,
+          },
         }
-      } :
-      {
-        [idValue]: {
-           [nameValue]: value
-        }
-      } 
+      : {
+          [idValue]: {
+            [nameValue]: value,
+          },
+        };
 
-      this.state.dataState = {
-        ...this.state.dataState,
+    this.state.dataState = {
+      ...this.state.dataState,
 
-        filter: {
-          ...this.filter, 
-          ...newFilter
-        },
-      } 
+      filter: {
+        ...this.filter,
+        ...newFilter,
+      },
+    };
   }
 
-  public onFilterReset(idValue: keyof IDataItem, nameValue: string) {
-
-    const item  = this.filter[idValue]
+  public onFilterReset(idValue: string, nameValue: string) {
+    const item = this.filter[idValue];
 
     if (item && !Array.isArray(item)) {
-      delete item[nameValue]
+      delete item[nameValue];
     }
 
     if (Object.keys(item).length == 0) {
-     delete this.filter[idValue]
+      delete this.filter[idValue];
     }
 
     this.state.dataState = {
-      ...this.state.dataState
-    }
+      ...this.state.dataState,
+    };
   }
 
   getParamInputValue() {
-    const paramList: IParamInputValue[] = paramInputValue.slice().map((input, index) => {
-      const id = input.id
+    const paramList: IParamInputValue[] = paramInputValue
+      .slice()
+      .map((input, index) => {
+        const id = input.id;
 
-      const values = this.model.data
-        .reduce((res, item) => {
+        const values: Value = this.model.data
+          .reduce((res: string[], item) => {
+            if (typeof item[id] === "boolean") {
+              if (res.includes("")) return res;
 
-          if (typeof item[id] === 'boolean') {
+              res.push("");
 
-          if(res.includes('')) return res
+              return res;
+            }
 
-          res.push('')
+            if (res.includes(item[id])) return res;
 
-          return res
-        }  
+            res.push(item[id]);
+            return res;
+          }, [])
+          .reduce((obj, item) => {
+            return {
+              ...obj,
+              [item]: false,
+            };
+          }, {});
 
-        if(res.includes(item[id])) return res
-
-        res.push(item[id])
-        return res
-
-      }, [])
-        .reduce((obj,item) => {
+        if (this.dataState && this.filter[id]) {
           return {
-            ...obj,
-            [item]: false
-          }
-        }, {})
-
-      if (this.dataState && this.filter[id]) {
-        return {
-          ...paramInputValue[index],
-          value: { 
-            ...paramInputValue[index].value,
-            ...values,
-            ...this.filter[id]
-          }
+            ...paramInputValue[index],
+            value: {
+              ...paramInputValue[index].value,
+              ...values,
+              ...this.filter[id],
+            },
+          };
+        } else {
+          return {
+            ...paramInputValue[index],
+            value: {
+              ...paramInputValue[index].value,
+              ...values,
+            },
+          };
         }
-      } else {
-        return {
-          ...paramInputValue[index],
-          value: { 
-            ...paramInputValue[index].value,
-            ...values,
-          }
-        }
-      }
-    })
-    return paramList
+      });
+    return paramList;
   }
 }
 
-export default AppController
+export default AppController;

@@ -1,12 +1,12 @@
-import Control from '../common/control';
-import InputRange from './inputRange';
-import { IParamInputRange, paramInputRange } from './options/optionsInputRange'
-import Marker from './marker'
-import Label from './label'
+import Control from "../common/control";
+import InputRange from "./inputRange";
+import { IParamInputRange } from "./options/optionsInputRange";
+import Marker from "./marker";
+import Label from "./label";
 
 class InputDoubleRange extends Control {
   public static id: number;
-  private param: IParamInputRange
+  private param: IParamInputRange;
   private percentLeft: number;
   private percentRight: number;
 
@@ -19,35 +19,56 @@ class InputDoubleRange extends Control {
     className: string,
     param: IParamInputRange,
     onChange: (id: string, value: string, isLeft: boolean) => void,
-    onReset: (id: string, isLeft: boolean) => void) {
-    super(parent, 'div', className)
+    onReset: (id: string, isLeft: boolean) => void
+  ) {
+    super(parent, "div", className);
 
-    this.param = param
-    const { id, min, max, value } = this.param
+    this.param = param;
+    const { id, min, max, value } = this.param;
 
-    const left = value.left === 'min' ? min : value.left;
-    const right = value.right === 'max' ? max : value.right
+    const left = value.left === "min" ? min : value.left;
+    const right = value.right === "max" ? max : value.right;
 
-    this.percentLeft = this.getPercent(+left)
-    this.percentRight = this.getPercent(+right)
+    this.percentLeft = this.getPercent(+left);
+    this.percentRight = this.getPercent(+right);
 
-    this.inputTrack = new Control(this.node, 'div', 'input-range__track');
-    this.setTrackColor()
+    this.inputTrack = new Control(this.node, "div", "input-range__track");
+    this.setTrackColor();
 
-    const titleWrap = new Control(this.node, 'div', 'input-range__wrap');
+    const titleWrap = new Control(this.node, "div", "input-range__wrap");
 
     const inputList = [
-      this.inputLeft = new InputRange(this.node, 'input-range__input left', this.param, left),
-      this.inputRight = new InputRange(this.node, 'input-range__input right', this.param, right)
-    ]
+      (this.inputLeft = new InputRange(
+        this.node,
+        "input-range__input left",
+        this.param,
+        left as string
+      )),
+      (this.inputRight = new InputRange(
+        this.node,
+        "input-range__input right",
+        this.param,
+        right as string
+      )),
+    ];
 
     inputList.map((input) => {
-      const isLeft: boolean = input.node.classList.contains('left');
+      const isLeft: boolean = input.node.classList.contains("left");
 
-      const label = new Label(this.node,'input-range__label', input.node.value, input.node.id)
+      const label = new Label(
+        this.node,
+        "input-range__label",
+        input.node.value,
+        input.node.id
+      );
 
-      const percent = isLeft ? this.percentLeft : this.percentRight
-      const marker = new Marker(titleWrap.node, 'input-range__title', input.node.value, percent);
+      const percent = isLeft ? this.percentLeft : this.percentRight;
+      const marker = new Marker(
+        titleWrap.node,
+        "input-range__title",
+        input.node.value,
+        percent
+      );
 
       input.node.oninput = () => {
         const value = this.update(input);
@@ -57,61 +78,63 @@ class InputDoubleRange extends Control {
 
         marker.onChange(percentNew, value);
 
-        if (value === input.node.max || value === input.node.min) onReset(id, isLeft)
-        else onChange(id, value, isLeft)
+        if (value === input.node.max || value === input.node.min)
+          onReset(id, isLeft);
+        else onChange(id, value, isLeft);
       };
 
       input.node.onmouseenter = () => {
-        marker.onHide()
-        
+        marker.onHide();
+
         if (isLeft) {
-          this.inputLeft.node.style.zIndex = '3';
-          this.inputRight.node.style.zIndex = '2';
+          this.inputLeft.node.style.zIndex = "3";
+          this.inputRight.node.style.zIndex = "2";
         } else {
-          this.inputRight.node.style.zIndex = '3';
-          this.inputLeft.node.style.zIndex = '2';
+          this.inputRight.node.style.zIndex = "3";
+          this.inputLeft.node.style.zIndex = "2";
         }
-      }
+      };
 
       input.node.onmouseleave = () => {
-        marker.onHide()
-      }
-    })
+        marker.onHide();
+      };
+    });
   }
 
   private getPercent(value: number) {
-    const { min, max } = this.param
+    const { min, max } = this.param;
     return ((value - +min) / (+max - +min)) * 100;
   }
 
   private setPercent(input: InputRange, percent: number, isLeft: boolean) {
     const value = +input.node.value;
- 
-    percent = this.getPercent(value)
 
-    if (isLeft) this.percentLeft = percent
-    else this.percentRight = percent
-    this.setTrackColor()
+    percent = this.getPercent(value);
 
-    return percent
-   
+    if (isLeft) this.percentLeft = percent;
+    else this.percentRight = percent;
+    this.setTrackColor();
+
+    return percent;
   }
 
   private setTrackColor() {
     this.inputTrack.node.style.background = `linear-gradient(to right, #dadae5 ${this.percentLeft}%,
-      #3264fe ${this.percentLeft}% , #3264fe ${this.percentRight}%, #dadae5 ${this.percentRight}%)`;;
+      #3264fe ${this.percentLeft}% , #3264fe ${this.percentRight}%, #dadae5 ${this.percentRight}%)`;
   }
 
-  private update(input: Control<HTMLInputElement>){
+  private update(input: Control<HTMLInputElement>) {
     const valueFirst = this.inputLeft.node.value;
     const valueSecond = this.inputRight.node.value;
 
-    if(+valueFirst > +valueSecond){
-      input.node.value = (input.node.classList.contains('left')) ? valueSecond : valueFirst
+    if (+valueFirst > +valueSecond) {
+      input.node.value = input.node.classList.contains("left")
+        ? valueSecond
+        : valueFirst;
     }
 
-    return input.node.value
+    return input.node.value;
   }
 }
 
-export default InputDoubleRange
+export default InputDoubleRange;

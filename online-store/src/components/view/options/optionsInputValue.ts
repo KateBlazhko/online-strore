@@ -1,28 +1,27 @@
-import { IDataItem } from '../../model/appModel';
+import { IDataItem } from "../../model/appModel";
+import { Value } from "../../model/appState";
 
 export interface IParamInputValue {
-  filter: string,
-  id: keyof IDataItem,
-  value?: {
-    [key: string]: string | boolean
-  }
+  filter: string;
+  id: keyof IDataItem;
+  value?: Value;
 }
 
 export const paramInputValue: IParamInputValue[] = [
-  { 
-    filter: 'Chipmaker',
-    id: 'chipmaker'
+  {
+    filter: "Chipmaker",
+    id: "chipmaker",
   },
   {
-    filter: 'Vendor',
-    id: 'vendor'
+    filter: "Vendor",
+    id: "vendor",
   },
   {
-    filter: 'GPU',
-    id: 'gpu'
+    filter: "GPU",
+    id: "gpu",
   },
   {
-    filter: 'Popular',
-    id: 'popular'
-  }
-]
+    filter: "Popular",
+    id: "popular",
+  },
+];
