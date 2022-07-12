@@ -10,15 +10,15 @@ class Popup extends Control {
     super(parent, className);
     this.onClose = () => {};
 
-    const overlay = new Control(this.node, "div", "popup-overlay");
-    const wrapper = new Control(overlay.node, "div", "popup-wrapper");
-    const closeButton = new Control(wrapper.node, "div", "popup-close-button");
-    const container = new Control(wrapper.node, "div", "popup-container");
+    const overlay = new Control(this.node, "div", "popup__overlay");
+    const wrapper = new Control(overlay.node, "div", "popup__wrapper");
+    const closeButton = new Control(wrapper.node, "div", "popup__close-button");
+    const container = new Control(wrapper.node, "div", "popup__container");
 
     // const popupImg = new Control (container.node, 'div', 'popup-img');
     // 		popupImg.node.style.backgroundImage = `url(${pet.img}`;
 
-    const popupData = new Control(container.node, "div", "popup-data");
+    const popupData = new Control(container.node, "div", "popup__data");
 
     this.name = new Control(popupData.node, "h3", "title", data.model);
     const subname = new Control(popupData.node, "h4", "subtitle");

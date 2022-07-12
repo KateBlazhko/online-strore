@@ -12,9 +12,14 @@ export type Filter = {
   [key: string]: Value;
 };
 
+export type Cart = {
+  [key: string]: number;
+};
+
 export interface IDataState {
   sorter: Sorter;
   filter: Filter;
+  cart: Cart;
 }
 
 export class AppState {
@@ -34,11 +39,12 @@ export class AppState {
     let dataState: IDataState;
     try {
       dataState = AppState.load();
-      // dataState = { sorter: {}, filter: {} }
+      // dataState = { sorter: {}, filter: {}, cart: {} }
     } catch (e: unknown) {
       dataState = {
         sorter: {},
         filter: {},
+        cart: {},
       };
     }
     this._dataState = dataState;

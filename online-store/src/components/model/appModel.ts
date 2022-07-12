@@ -12,6 +12,7 @@ export interface IDataItem {
   release: string;
   popular: string;
   quantity: string;
+  id: string;
 }
 
 class AppModel {
@@ -73,7 +74,7 @@ class AppModel {
 
   private sortData(data: readonly IDataItem[], dataState: IDataState) {
     const sorter = dataState.sorter;
-    const sortData = data.slice()
+    const sortData = data.slice();
     if (Object.keys(sorter).length > 0) {
       const key = Object.getOwnPropertyNames(sorter)[0];
 
@@ -89,7 +90,6 @@ class AppModel {
         });
 
         this.renderData(sortData);
-
       } else {
         sortData.sort((a, b) => {
           if (a[id] < b[id]) return 1;

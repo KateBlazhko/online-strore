@@ -4,31 +4,35 @@ import Popup from "./popup";
 import { IDataItem } from "../model/appModel";
 
 export class Card extends Control {
-  public cardNumber: number;
+  // public cardNumber: string;
 
-  private data: IDataItem;
+  // private data: IDataItem;
 
   constructor(
     parent: HTMLElement | null,
     className: string,
-    cardNumber: number,
-    data: IDataItem
+    data: IDataItem,
+    isInCart: boolean,
+    onCartUp: (id: string, count: number) => boolean,
+    onCartDown: (id: string) => void
   ) {
     super(parent, "div", className);
-    this.cardNumber = cardNumber;
-    this.data = data;
+
+    // this.data = data;
+    const cardNumber = data.id;
+    const count = +data.quantity;
 
     const img = new Control(this.node, "div", "card__img");
-    img.node.style.backgroundImage = `url(./assets/img/${this.data.image})`;
+    img.node.style.backgroundImage = `url(./assets/img/${data.image})`;
 
-    const model = new Control(this.node, "div", "card__name", this.data.model);
+    const model = new Control(this.node, "div", "card__name", data.model);
+
     const buttonDetails = new Control(
       this.node,
       "div",
       "button",
       "View details"
     );
-    const buttonCart = new Control(this.node, "div", "button", "Add to cart");
 
     buttonDetails.node.onclick = () => {
       document.body.style.overflow = "hidden";
@@ -41,8 +45,37 @@ export class Card extends Control {
       };
     };
 
-    buttonCart.node.onclick = () => {
-      console.log("hhh");
+    const buttonAddCart = new Control(
+      this.node,
+      "div",
+      "button",
+      "Add to cart"
+    );
+    const buttonRemoveCart = new Control(
+      this.node,
+      "div",
+      "button button_remove",
+      "Remove from cart"
+    );
+
+    if (isInCart) {
+      this.node.classList.add('cart')
+      buttonRemoveCart.node.style.opacity = "1";      
+    }
+
+    buttonRemoveCart.node.onclick = () => {
+      onCartDown(cardNumber);
+      buttonRemoveCart.node.style.opacity = "0";
+      this.node.classList.remove("in-cart");
+    };
+
+    buttonAddCart.node.onclick = () => {
+      const isAdd = onCartUp(cardNumber, count);
+
+      if (isAdd) {
+        buttonRemoveCart.node.style.opacity = "1";
+        this.node.classList.add("in-cart")
+      }
     };
   }
 

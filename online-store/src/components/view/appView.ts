@@ -7,10 +7,11 @@ import FilterValue from "./filterValue";
 import Goods from "./goods";
 import Search from "./search";
 import Header from "./header";
+import Notification from "./notification";
 import { IDataItem } from "../model/appModel";
 
 class AppView {
-  private header: Control;
+  private header: Header;
   private main: Control;
   private footer: Control;
 
@@ -22,50 +23,65 @@ class AppView {
   private goods: Goods;
 
   constructor(model: AppModel, controller: AppController) {
-    this.header = new Header(document.body, "header");
+    this.controller = controller;
+    const [cardsInCart, countInCart] = this.controller.getParamCart()
+
+    this.header = new Header(document.body, "header", countInCart);
     this.main = new Control(document.body, "main", "app");
     this.footer = new Control(document.body, "footer", "footer");
 
-    this.controller = controller;
-
     const container = new Control(this.main.node, "div", "container");
     const settings = new Control(container.node, "div", "settings");
-    this.goods = new Goods(container.node, "goods");
+    this.goods = new Goods(
+      container.node,
+      "goods",
+      cardsInCart,
+      this.onCartUp,
+      this.onCartDown
+    );
 
     this.search = new Search(settings.node, "search");
-
     this.settingsInner = new Control(settings.node, "div", "settings__inner");
 
     this.sortersList = this.drawSorters();
     this.filtersList = this.drawFilters();
 
-    const buttonResetFilters = new Control(settings.node, "div", "button", "Reset filters");
-
+    const buttonResetFilters = new Control(
+      settings.node,
+      "div",
+      "button",
+      "Reset filters"
+    );
     buttonResetFilters.node.onclick = () => {
       this.filtersList.map((filter) => filter.destroy());
-
       this.controller.onReset();
-
       this.filtersList = this.drawFilters();
     };
 
-    const buttonResetSettings = new Control(settings.node, "div", "button", "Reset settings");
-
+    const buttonResetSettings = new Control(
+      settings.node,
+      "div",
+      "button",
+      "Reset settings"
+    );
     buttonResetSettings.node.onclick = () => {
       this.filtersList.map((filter) => filter.destroy());
       this.sortersList.map((sorter) => sorter.destroy());
-      
-      this.goods.destroy()
-      this.goods = new Goods(container.node, "goods");
+      this.goods.destroy();
 
+      this.goods = new Goods(
+        container.node,
+        "goods",
+        cardsInCart,
+        this.onCartUp,
+        this.onCartDown,
+      );
       this.controller.onResetAll();
-
       this.sortersList = this.drawSorters();
       this.filtersList = this.drawFilters();
     };
 
     model.renderData = (data: readonly IDataItem[]) => {
-      console.log(data)
       this.drawGoods(data);
     };
   }
@@ -121,8 +137,35 @@ class AppView {
   }
 
   public drawGoods(data: readonly IDataItem[]) {
-    this.goods.update(data);
+    const [cardsInCart] = this.controller.getParamCart()
+
+    this.goods.update(data, cardsInCart);
   }
+
+  private onCartUp = (id: string, count: number) => {
+    const isAdd = this.controller.addInCart(id, count);
+
+    if (isAdd === true) {
+      this.header.update();
+      return true;
+    }
+
+    const notification = new Notification(
+      this.header.node,
+      "notification",
+      isAdd
+    );
+    notification.onClose = () => {
+      notification.node.remove();
+    };
+
+    return false;
+  };
+
+  private onCartDown = (id: string) => {
+    const count = this.controller.removeFromCart(id);
+    this.header.update(count);
+  };
 }
 
 export default AppView;

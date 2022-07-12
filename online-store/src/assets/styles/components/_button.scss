@@ -2,4 +2,8 @@
   font-size: 2rem;
 
   cursor: pointer;
+
+  &_remove {
+    opacity: 0;
+  }
 }

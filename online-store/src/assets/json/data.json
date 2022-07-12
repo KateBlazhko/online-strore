@@ -10,7 +10,8 @@
     "price": "1200",
     "release": "2020",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "1"
   },
   {
     "image": "2.jpg",
@@ -23,7 +24,8 @@
     "price": "1300",
     "release": "2019",
     "popular": false,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "2"
   },
   {
     "image": "3.jpg",
@@ -36,7 +38,8 @@
     "price": "3000",
     "release": "2020",
     "popular": true,
-    "quantity": "1"
+    "quantity": "1",
+    "id": "3"
   },
   {
     "image": "4.jpg",
@@ -49,7 +52,8 @@
     "price": "1500",
     "release": "2021",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "4"
   },
   {
     "image": "5.jpg",
@@ -62,7 +66,8 @@
     "price": "500",
     "release": "2019",
     "popular": false,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "5"
   },
   {
     "image": "6.jpg",
@@ -75,7 +80,8 @@
     "price": "800",
     "release": "2016",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "6"
   },
   {
     "image": "7.jpg",
@@ -88,7 +94,9 @@
     "price": "1800",
     "release": "2020",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "7"
+    
   },
   {
     "image": "8.jpg",
@@ -101,7 +109,8 @@
     "price": "550",
     "release": "2019",
     "popular": false,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "8"
   },
   {
     "image": "9.jpg",
@@ -114,7 +123,8 @@
     "price": "1300",
     "release": "2020",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "9"
   },
   {
     "image": "10.jpg",
@@ -127,7 +137,8 @@
     "price": "1000",
     "release": "2019",
     "popular": false,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "10"
   },
   {
     "image": "11.jpg",
@@ -140,7 +151,8 @@
     "price": "1300",
     "release": "2021",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "11"
   },
   {
     "image": "12.jpg",
@@ -153,7 +165,8 @@
     "price": "1300",
     "release": "2021",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "12"
   },
   {
     "image": "13.jpg",
@@ -166,7 +179,8 @@
     "price": "500",
     "release": "2017",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "13"
   },
   {
     "image": "14.jpg",
@@ -179,7 +193,8 @@
     "price": "700",
     "release": "2018",
     "popular": false,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "14"
   },
   {
     "image": "15.jpg",
@@ -192,7 +207,8 @@
     "price": "500",
     "release": "2017",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "15"
   },
   {
     "image": "16.jpg",
@@ -205,7 +221,8 @@
     "price": "550",
     "release": "2017",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "16"
   },
   {
     "image": "17.jpg",
@@ -218,7 +235,8 @@
     "price": "550",
     "release": "2017",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "17"
   },
   {
     "image": "18.jpg",
@@ -231,7 +249,8 @@
     "price": "700",
     "release": "2018",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "18"
   },
   {
     "image": "19.jpg",
@@ -244,7 +263,8 @@
     "price": "1500",
     "release": "2021",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "19"
   },
   {
     "image": "20.jpg",
@@ -257,7 +277,8 @@
     "price": "2000",
     "release": "2021",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "20"
   },
   {
     "image": "21.jpg",
@@ -270,6 +291,7 @@
     "price": "1500",
     "release": "2021",
     "popular": true,
-    "quantity": "10"
+    "quantity": "10",
+    "id": "21"
   }
 ]

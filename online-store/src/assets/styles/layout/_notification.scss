@@ -1,4 +1,4 @@
-.popup__overlay {
+.notification__overlay {
 	position: fixed;
   top: 0;
 	left: 0;
@@ -18,7 +18,7 @@
 	animation-direction: normal;
 }
 
-.popup__wrapper {
+.notification__wrapper {
 	@include flex($direction: column);
 	width: 952px;
 
@@ -32,7 +32,7 @@
 			width: 270px;
 		}
 
-		// .popup-close-button {
+		// .notification_close-button {
 		// 	align-self: flex-end;
 		// 	@include button ($width: 52px, $border: 2px solid $color-primary,
 		// 		$color-bg: transparent, $color: $color-dark-3xl); 
@@ -54,7 +54,7 @@
 
 		// }
 
-		.popup__container {
+		.notification__container {
 			overflow: hidden;
 			@include flex();
 			align-self: flex-start;
@@ -67,24 +67,7 @@
 				width: calc(100% - 30px);
 			}
 
-			// .popup-img {
-			// 	width: 500px;
-			// 	padding-bottom: calc(500 / 900 * 100%);
-
-			// 	background-size: cover;
-			// 	background-repeat: no-repeat;
-
-			// 	@media (max-width: ($desctop - 1px)) {
-			// 		width: 350px;
-			// 		padding-bottom: calc(350 / 630 * 100%);
-			// 	}
-
-			// 	@media (max-width: ($tablet - 1px)) {
-			// 		display: none;
-			// 	}
-			// }
-
-			.popup__data {
+			.notification__text {
 				align-self: flex-start;
 				@include flex($aling: flex-start, $direction: column);
 				gap: 10px;
@@ -109,61 +92,6 @@
 						align-self: center;
 					}
 				}
-
-				// .subtitle {
-				// 	@include font($family: 'Noto', $size: 20px, $line: 115%, $letter: 0.02em);
-
-				// 	@media (max-width: ($tablet - 1px)) {
-				// 		align-self: center;
-
-				// 		text-align: center;
-				// 	}
-				// }
-
-				// .pets-description {
-				// 	padding: 30px 0;
-
-				// 	@include font($family: 'Noto', $size: 15px, $line: 115%, $letter: 0.03em);
-
-				// 	@media (max-width: ($desctop - 1px)) {
-				// 		padding: 10px 0 14px 0;
-
-				// 		font-size: 13px;
-				// 	}
-
-				// 	@media (max-width: ($tablet - 1px)) {
-				// 		text-align: justify;
-				// 	}
-				// }
-
-				// .popup-list {
-
-				// 	li:not(:last-child) {
-				// 		padding-bottom: 10px;
-
-				// 		@media (max-width: ($desctop - 1px)) {
-				// 			padding-bottom: 5px;
-				// 		}
-				// 	}
-
-				// 	.list-item {	
-				// 		font-weight: bold;
-
-				// 		list-style-position: inside;
-						
-				// 		&::before {
-				// 			color: $color-primary; 
-				// 			content: "●"; 
-				// 			padding-right: 10px; 
-							
-				// 		}
-
-				// 		span {
-				// 			font-weight: normal;
-				// 		}
-				// 	}
-				// }
-
 			}
 		}
 }

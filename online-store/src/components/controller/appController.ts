@@ -2,12 +2,11 @@ import Loader from "./loader";
 import AppState from "../model/appState";
 import { IDataState, Filter, Sorter } from "../model/appState";
 import { IDataItem } from "../model/appModel";
-import { IParamInputRange } from "../view/options/optionsInputRange";
 import { paramInputRange } from "../view/options/optionsInputRange";
 import { IParamInputValue } from "../view/options/optionsInputValue";
 import { paramInputValue } from "../view/options/optionsInputValue";
 import { paramSorter } from "../view/options/optionsSorter";
-import { Value } from "../model/appState";
+import { Value, Cart } from "../model/appState";
 
 import AppModel from "../model/appModel";
 
@@ -17,6 +16,8 @@ class AppController extends Loader {
   private state: AppState;
   private filter: Filter;
   private sorter: Sorter;
+  private cart: Cart;
+  private countInCart: number;
   private model: AppModel;
   private _dataState: IDataState;
 
@@ -27,9 +28,6 @@ class AppController extends Loader {
   set dataState(value: IDataState) {
     this._dataState = value;
     this.model.filterData(this._dataState);
-    // this.getParamSorter();
-    // this.getParamInputRange();
-    // this.getParamInputValue();
   }
 
   constructor(state: AppState, model: AppModel) {
@@ -38,31 +36,100 @@ class AppController extends Loader {
     this._dataState = this.state.dataState;
     this.filter = this.state.dataState.filter;
     this.sorter = this.state.dataState.sorter;
+    this.cart = this.state.dataState.cart;
     this.model = model;
+    this.countInCart = Object.values(this.cart).reduce((sum, item) => sum + item, 0);
 
     const onChange = (dataState: IDataState) => {
       this.dataState = dataState;
       this.filter = this.state.dataState.filter;
       this.sorter = this.state.dataState.sorter;
+      this.cart = this.state.dataState.cart;
+      console.log(dataState)
     };
 
     this.state.onChange.add(onChange);
+
+    
   }
 
   public getData(callback: Callback<IDataItem[]>): void {
     super.load<IDataItem[]>(callback);
   }
 
-  public onReset() {
-    this.state.dataState = { 
+  public addInCart(id: string, count: number) {
+    if (this.countInCart < 20) {
+
+      if (`${id}` in this.cart) {
+        if (this.cart[id] < count) {
+          this.cart[id] += 1;
+          this.countInCart += 1;
+
+          this.state.dataState = {
+            ...this.state.dataState,
+      
+            cart: {
+              ...this.cart,
+            }
+          };
+          return true;
+        }
+
+        return "Unavailable count";
+      }
+
+      this.cart = {
+        ...this.cart,
+        [id]: 1,
+      };
+      this.countInCart += 1;
+
+      this.state.dataState = {
+        ...this.state.dataState,
+  
+        cart: {
+          ...this.cart,
+        }
+      };
+
+      return true;
+    }
+    return "The cart is full";
+  }
+
+  public removeFromCart(id: string): number {
+    if (`${id}` in this.cart) {
+      this.countInCart -= this.cart[id];
+      delete this.cart[id];
+    }
+    this.state.dataState = {
       ...this.state.dataState,
-      filter: {} };
+
+      cart: {
+        ...this.cart,
+      }
+    };
+    return this.countInCart;
+  }
+
+  public getParamCart(): [string[], number] {
+    console.log([Object.keys(this.cart), this.countInCart])
+    return [Object.keys(this.cart), this.countInCart]
+  }
+
+  public onReset() {
+    this.state.dataState = {
+      ...this.state.dataState,
+      filter: {},
+    };
   }
 
   public onResetAll() {
-    this.state.dataState = { 
+    this.state.dataState = {
       sorter: {},
-      filter: {} };
+      filter: {},
+      cart: {},
+    };
   }
 
   public getParamSorter() {
@@ -73,8 +140,7 @@ class AppController extends Loader {
         ...paramSorter,
         [key]: true,
       };
-    } 
-    console.log(paramSorter)
+    }
     return paramSorter;
   }
 
