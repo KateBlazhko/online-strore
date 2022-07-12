@@ -32,6 +32,9 @@ const config = {
                 { from: './src/assets/json',
                   to: path.resolve(__dirname, 'dist/assets/json')
                 },
+                { from: './src/assets/icons',
+                  to: path.resolve(__dirname, 'dist/assets/icons')
+                },
             ], 
           }),
     ],
@@ -51,8 +54,15 @@ const config = {
                 use: [stylesHandler, 'css-loader', 'sass-loader'],
             },
             {
-                test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+                test: /\.(eot|ttf|woff|woff2|png|jpg|gif)$/i,
                 type: 'asset',
+            },
+            {
+                test: /\.(svg|ico)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/icons/[name][ext]',
+                  }
             },
 
         ],

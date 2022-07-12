@@ -4,6 +4,7 @@ import Popup from "./popup";
 import { IDataItem } from "../model/appModel";
 
 export class Card extends Control {
+  private content: string
   // public cardNumber: string;
 
   // private data: IDataItem;
@@ -18,14 +19,18 @@ export class Card extends Control {
   ) {
     super(parent, "div", className);
 
-    // this.data = data;
     const cardNumber = data.id;
     const count = +data.quantity;
 
     const img = new Control(this.node, "div", "card__img");
     img.node.style.backgroundImage = `url(./assets/img/${data.image})`;
 
-    const model = new Control(this.node, "div", "card__name", data.model);
+    this.content = new Control(this.node, "div", "card__inner").node.innerHTML = `
+    <div class="card__content">Model: <span>${data.model}</span></div>
+    <div class="card__content">Chipmaker: <span>${data.chipmaker}</span></div>
+    <div class="card__content">Year: <span>${data.release}</span></div>
+    <div class="card__content">Count: <span>${count.toString()}</span></div>
+    <div class="card__content">Price: <span>${data.price}BYN</span></div>`
 
     const buttonDetails = new Control(
       this.node,
@@ -33,7 +38,6 @@ export class Card extends Control {
       "button",
       "View details"
     );
-
     buttonDetails.node.onclick = () => {
       document.body.style.overflow = "hidden";
       document.body.style.marginRight = `${Card.getScrollWidth()}px`;
@@ -59,8 +63,8 @@ export class Card extends Control {
     );
 
     if (isInCart) {
-      this.node.classList.add('cart')
-      buttonRemoveCart.node.style.opacity = "1";      
+      this.node.classList.add("cart");
+      buttonRemoveCart.node.style.opacity = "1";
     }
 
     buttonRemoveCart.node.onclick = () => {
@@ -74,7 +78,7 @@ export class Card extends Control {
 
       if (isAdd) {
         buttonRemoveCart.node.style.opacity = "1";
-        this.node.classList.add("in-cart")
+        this.node.classList.add("in-cart");
       }
     };
   }

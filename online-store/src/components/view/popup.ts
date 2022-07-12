@@ -3,7 +3,7 @@ import * as func from "../common/function";
 import { IDataItem } from "../model/appModel";
 
 class Popup extends Control {
-  private name: Control;
+  // private name: Control;
   public onClose: () => void;
 
   constructor(parent: HTMLElement | null, className: string, data: IDataItem) {
@@ -15,13 +15,24 @@ class Popup extends Control {
     const closeButton = new Control(wrapper.node, "div", "popup__close-button");
     const container = new Control(wrapper.node, "div", "popup__container");
 
-    // const popupImg = new Control (container.node, 'div', 'popup-img');
-    // 		popupImg.node.style.backgroundImage = `url(${pet.img}`;
+    const popupImg = new Control (container.node, 'div', 'popup__img');
+    		popupImg.node.style.backgroundImage = `url(./assets/img/${data.image})`;
 
-    const popupData = new Control(container.node, "div", "popup__data");
+    // this.name = new Control(container.node, "h3", "title", data.model);
 
-    this.name = new Control(popupData.node, "h3", "title", data.model);
-    const subname = new Control(popupData.node, "h4", "subtitle");
+    const popupData = new Control(container.node, "ul", "popup__list");
+    popupData.node.innerHTML = `
+    ${data.model}
+    <li class="popup__item">Chipmaker: <span>${data.chipmaker}</span></li>
+    <li class="popup__item">Vendor: <span>${data.vendor}</span></li>
+    <li class="popup__item">Gpu: <span>${data.gpu}</span></li>
+    <li class="popup__item">Memory: <span>${data.memory}</span></li>
+    <li class="popup__item">Year: <span>${data.release}</span></li>
+    <li class="popup__item">Other: <span>${data.other}</span></li>
+    <li class="popup__item">Count: <span>${data.quantity.toString()}</span></li>
+    <li class="popup__item">Popular: <span>${data.popular}</span></li>
+    <li class="popup__item">Price: <span>${data.price}BYN</span></li>`
+    
 
     // this.type = new Control (subname.node, 'span', 'text', pet.type);
     // const spacer = new Control (subname.node, 'span', 'text', ' - ');

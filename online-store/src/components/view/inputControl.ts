@@ -17,18 +17,17 @@ class InputControl extends Control<HTMLInputElement> {
     this.node.type = type;
     this.node.name = name;
 
-    if (type === 'checkbox' || type === 'radio') {
-      this.createCheckInput(checked, id)
+    if (type === "checkbox" || type === "radio") {
+      this.createCheckInput(checked, id);
     }
 
-    if (type === 'search') {
-      this.createSearchInput()
+    if (type === "search") {
+      this.createSearchInput();
     }
   }
 
   createCheckInput(checked?: boolean, id?: string) {
-    if (checked !== undefined) 
-      this.node.checked = checked
+    if (checked !== undefined) this.node.checked = checked;
 
     if (id !== undefined) {
       this.node.value = id;
@@ -41,9 +40,9 @@ class InputControl extends Control<HTMLInputElement> {
   }
 
   createSearchInput() {
-    this.node.placeholder = "Search goods..."
-    this.node.autocomplete = "off"
-    this.node.focus()
+    this.node.placeholder = "Search goods...";
+    this.node.autocomplete = "off";
+    this.node.focus();
 
     this.node.oninput = () => {
       this.onInput(this.node.value);

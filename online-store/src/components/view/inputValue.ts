@@ -29,8 +29,8 @@ class InputMultipleValue extends Control {
         );
 
         input.onInput = (checked) => {
-          if (typeof checked === 'boolean') {
-            if (checked ) onChange(id, checked, key);
+          if (typeof checked === "boolean") {
+            if (checked) onChange(id, checked, key);
             else onReset(id, key);
           }
         };

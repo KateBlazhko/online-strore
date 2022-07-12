@@ -11,4 +11,14 @@
     background-size: contain;
     background-repeat: no-repeat;
   }
+
+  &__inner {
+    width: 100%;
+
+    font-weight: bold;
+
+    span {
+      font-weight: normal;
+    }
+  }
 }

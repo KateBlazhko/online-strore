@@ -30,7 +30,7 @@ class AppModel {
 
   constructor() {
     this._data = [];
-    this.assortedData = []
+    this.assortedData = [];
     this.renderData = () => {};
   }
 
@@ -58,12 +58,10 @@ class AppModel {
   ) {
     const pItem = arr.filter((item) => {
       if (typeof value === "string") {
-        return item[param]
-          .toLowerCase()
-          .includes(value.toLowerCase())
+        return item[param].toLowerCase().includes(value.toLowerCase());
       }
 
-      if ((typeof value === "object")) {
+      if (typeof value === "object") {
         if ("left" in value || "right" in value) {
           if (value.left && value.right)
             return +item[param] >= +value.left && +item[param] <= +value.right;
@@ -98,7 +96,6 @@ class AppModel {
           if (a[id] < b[id]) return -1;
           return 0;
         });
-
       } else {
         this.assortedData.sort((a, b) => {
           if (a[id] < b[id]) return 1;
@@ -106,21 +103,19 @@ class AppModel {
           if (a[id] > b[id]) return -1;
           return 0;
         });
-
       }
-    } 
+    }
 
     this.renderData(this.assortedData);
-
   }
 
-   public search(value: string) {
-    let searchData = this.assortedData.slice()
+  public search(value: string) {
+    let searchData = this.assortedData.slice();
     if (value) {
       searchData = AppModel.filter(searchData, "model", value);
     }
 
-    this.renderData(searchData)
+    this.renderData(searchData);
   }
 }
 

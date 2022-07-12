@@ -24,7 +24,7 @@ class AppView {
 
   constructor(model: AppModel, controller: AppController) {
     this.controller = controller;
-    const [cardsInCart, countInCart] = this.controller.getParamCart()
+    const [cardsInCart, countInCart] = this.controller.getParamCart();
 
     this.header = new Header(document.body, "header", countInCart);
     this.main = new Control(document.body, "main", "app");
@@ -41,7 +41,7 @@ class AppView {
     );
 
     this.search = new Search(settings.node, "search", (value: string) => {
-      model.search(value)
+      model.search(value);
     });
 
     this.settingsInner = new Control(settings.node, "div", "settings__inner");
@@ -77,7 +77,7 @@ class AppView {
         "goods",
         cardsInCart,
         this.onCartUp,
-        this.onCartDown,
+        this.onCartDown
       );
       this.controller.onResetAll();
       this.sortersList = this.drawSorters();
@@ -140,7 +140,7 @@ class AppView {
   }
 
   public drawGoods(data: readonly IDataItem[]) {
-    const [cardsInCart] = this.controller.getParamCart()
+    const [cardsInCart] = this.controller.getParamCart();
 
     this.goods.update(data, cardsInCart);
   }

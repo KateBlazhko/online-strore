@@ -3,7 +3,11 @@ import Control from "../common/control";
 class Header extends Control {
   private cart: Control;
 
-  constructor(parent: HTMLElement | null, className: string, countInCart: number) {
+  constructor(
+    parent: HTMLElement | null,
+    className: string,
+    countInCart: number
+  ) {
     super(parent, "header", className);
 
     const title = new Control(this.node, "h1", "title", "Online-store");

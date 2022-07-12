@@ -19,7 +19,7 @@ class Goods extends Control {
   ) {
     super(parent, "div", className);
 
-    this.cart = cart
+    this.cart = cart;
     this.onCartUp = onCartUp;
     this.onCartDown = onCartDown;
 
@@ -36,8 +36,8 @@ class Goods extends Control {
   }
 
   public update(data: readonly IDataItem[], cart: string[]) {
-    this.cart = cart
-    
+    this.cart = cart;
+
     if (this.dataList.length > 0)
       this.dataList.map((dataItem) => dataItem.destroy());
 
@@ -58,19 +58,17 @@ class Goods extends Control {
   }
 
   private draw(data: readonly IDataItem[]) {
-    this.dataList = data.map(
-      (dataItem) => {
-        const isInCart = this.cart.includes(dataItem.id)
-        return new Card(
-          this.cardWrap.node,
-          "card",
-          dataItem,
-          isInCart,
-          this.onCartUp,
-          this.onCartDown
-        )
-      }
-    );
+    this.dataList = data.map((dataItem) => {
+      const isInCart = this.cart.includes(dataItem.id);
+      return new Card(
+        this.cardWrap.node,
+        "card",
+        dataItem,
+        isInCart,
+        this.onCartUp,
+        this.onCartDown
+      );
+    });
   }
 }
 
