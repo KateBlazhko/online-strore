@@ -40,7 +40,10 @@ class AppView {
       this.onCartDown
     );
 
-    this.search = new Search(settings.node, "search");
+    this.search = new Search(settings.node, "search", (value: string) => {
+      model.search(value)
+    });
+
     this.settingsInner = new Control(settings.node, "div", "settings__inner");
 
     this.sortersList = this.drawSorters();

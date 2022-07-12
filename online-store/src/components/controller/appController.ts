@@ -42,10 +42,9 @@ class AppController extends Loader {
 
     const onChange = (dataState: IDataState) => {
       this.dataState = dataState;
-      this.filter = this.state.dataState.filter;
-      this.sorter = this.state.dataState.sorter;
-      this.cart = this.state.dataState.cart;
-      console.log(dataState)
+      this.filter = this.dataState.filter;
+      this.sorter = this.dataState.sorter;
+      this.cart = this.dataState.cart;
     };
 
     this.state.onChange.add(onChange);
@@ -113,7 +112,6 @@ class AppController extends Loader {
   }
 
   public getParamCart(): [string[], number] {
-    console.log([Object.keys(this.cart), this.countInCart])
     return [Object.keys(this.cart), this.countInCart]
   }
 

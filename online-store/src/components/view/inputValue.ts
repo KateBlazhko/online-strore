@@ -28,9 +28,11 @@ class InputMultipleValue extends Control {
           checked
         );
 
-        input.onInput = (checked: boolean) => {
-          if (checked) onChange(id, checked, key);
-          else onReset(id, key);
+        input.onInput = (checked) => {
+          if (typeof checked === 'boolean') {
+            if (checked ) onChange(id, checked, key);
+            else onReset(id, key);
+          }
         };
 
         const label = new Label(this.node, "filter-value__label", key, id);

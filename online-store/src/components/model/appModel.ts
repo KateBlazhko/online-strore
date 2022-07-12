@@ -17,6 +17,7 @@ export interface IDataItem {
 
 class AppModel {
   private _data: IDataItem[];
+  private assortedData: IDataItem[];
   public renderData: (data: readonly IDataItem[]) => void;
 
   get data() {
@@ -29,13 +30,14 @@ class AppModel {
 
   constructor() {
     this._data = [];
+    this.assortedData = []
     this.renderData = () => {};
   }
 
   public filterData(dataState: IDataState) {
-    const filter: Filter = dataState.filter;
     if (this.data) {
-      if (dataState) {
+      if (Object.keys(dataState.filter).length > 0) {
+        const filter: Filter = dataState.filter;
         const filters: string[] = Object.keys(filter);
 
         const filterData = filters.reduce((res: IDataItem[], param) => {
@@ -52,20 +54,28 @@ class AppModel {
   private static filter(
     arr: IDataItem[],
     param: keyof IDataItem,
-    value: Value
+    value: Value | string
   ) {
     const pItem = arr.filter((item) => {
-      if ("left" in value || "right" in value) {
-        if (value.left && value.right)
-          return +item[param] >= +value.left && +item[param] <= +value.right;
-        if (value.left) return +item[param] >= +value.left;
-        if (value.right) return +item[param] <= +value.right;
-      } else {
-        for (const key in value) {
-          if (item[param] === value[key]) return true;
-          if (item[param] === key) return true;
+      if (typeof value === "string") {
+        return item[param]
+          .toLowerCase()
+          .includes(value.toLowerCase())
+      }
+
+      if ((typeof value === "object")) {
+        if ("left" in value || "right" in value) {
+          if (value.left && value.right)
+            return +item[param] >= +value.left && +item[param] <= +value.right;
+          if (value.left) return +item[param] >= +value.left;
+          if (value.right) return +item[param] <= +value.right;
+        } else {
+          for (const key in value) {
+            if (item[param] === value[key]) return true;
+            if (item[param] === key) return true;
+          }
+          return false;
         }
-        return false;
       }
     });
 
@@ -74,7 +84,7 @@ class AppModel {
 
   private sortData(data: readonly IDataItem[], dataState: IDataState) {
     const sorter = dataState.sorter;
-    const sortData = data.slice();
+    this.assortedData = data.slice();
     if (Object.keys(sorter).length > 0) {
       const key = Object.getOwnPropertyNames(sorter)[0];
 
@@ -82,27 +92,35 @@ class AppModel {
       const isUp = key.split(".")[2] === "up" ? true : false;
 
       if (isUp) {
-        sortData.sort((a, b) => {
+        this.assortedData.sort((a, b) => {
           if (a[id] > b[id]) return 1;
           if (a[id] == b[id]) return 0;
           if (a[id] < b[id]) return -1;
           return 0;
         });
 
-        this.renderData(sortData);
       } else {
-        sortData.sort((a, b) => {
+        this.assortedData.sort((a, b) => {
           if (a[id] < b[id]) return 1;
           if (a[id] == b[id]) return 0;
           if (a[id] > b[id]) return -1;
           return 0;
         });
 
-        this.renderData(sortData);
       }
-    } else {
-      this.renderData(data);
+    } 
+
+    this.renderData(this.assortedData);
+
+  }
+
+   public search(value: string) {
+    let searchData = this.assortedData.slice()
+    if (value) {
+      searchData = AppModel.filter(searchData, "model", value);
     }
+
+    this.renderData(searchData)
   }
 }
 
