@@ -33,6 +33,13 @@ p {
 
 }
 
+body {
+  font-family: 'Poppins', sans-serif;
+
+  background-image: url('./assets/img/bg.png');
+  background-size: 100px;
+}
+
 .scroll {
   position: absolute;
   overflow: scroll;

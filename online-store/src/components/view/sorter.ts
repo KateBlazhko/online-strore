@@ -1,6 +1,6 @@
 import Control from "../common/control";
 import Label from "./label";
-import { IParamSorter, paramSorter } from "../view/options/optionsSorter";
+import { IParamSorter } from "../controller/IOptions";
 import InputControl from "./inputControl";
 
 class Sorter extends Control {
@@ -14,11 +14,11 @@ class Sorter extends Control {
   ) {
     super(parent, "div", className);
 
-    const title = new Control(this.node, "h2", "title", "Sort by");
+    const title = new Control(this.node, "h2", "subtitle", "Sort by");
 
     const sorterWrap = new Control(this.node, "div", "sorter__wrapper");
 
-    for (const key in paramSorter) {
+    for (const key in param) {
       const checked: boolean = param[key];
       const id = key.split(".")[0];
       const input = new InputControl(

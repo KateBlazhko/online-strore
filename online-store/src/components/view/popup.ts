@@ -18,8 +18,6 @@ class Popup extends Control {
     const popupImg = new Control (container.node, 'div', 'popup__img');
     		popupImg.node.style.backgroundImage = `url(./assets/img/${data.image})`;
 
-    // this.name = new Control(container.node, "h3", "title", data.model);
-
     const popupData = new Control(container.node, "ul", "popup__list");
     popupData.node.innerHTML = `
     ${data.model}
@@ -32,24 +30,6 @@ class Popup extends Control {
     <li class="popup__item">Count: <span>${data.quantity.toString()}</span></li>
     <li class="popup__item">Popular: <span>${data.popular}</span></li>
     <li class="popup__item">Price: <span>${data.price}BYN</span></li>`
-    
-
-    // this.type = new Control (subname.node, 'span', 'text', pet.type);
-    // const spacer = new Control (subname.node, 'span', 'text', ' - ');
-    // this.breed = new Control (subname.node, 'span', 'text', pet.breed);
-
-    // this.description = new Control (popupData.node, 'p', 'pets-description', pet.description);
-
-    // const list = new Control (popupData.node, 'ul', 'popup-list');
-    // this.age = new Control (list.node, 'li', 'list-item', `Age: <span>${pet.age}<span>`);
-    // this.inoculations = new Control (list.node, 'li', 'list-item',
-    //                                     `Inoculations: <span>${pet.inoculations.join(', ')}</span>`);
-
-    // this.diseases = new Control (list.node, 'li', 'list-item',
-    //                                 `Diseases: <span>${pet.diseases.join(', ')}</span>`);
-
-    // this.parasites = new Control (list.node, 'li', 'list-item',
-    //                                  `Parasites: <span>${pet.parasites.join(', ')}</span>`);
 
     closeButton.node.onclick = () => {
       this.onClose();

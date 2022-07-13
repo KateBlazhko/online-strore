@@ -52,7 +52,7 @@ class AppView {
     const buttonResetFilters = new Control(
       settings.node,
       "div",
-      "button",
+      "button button_reset",
       "Reset filters"
     );
     buttonResetFilters.node.onclick = () => {
@@ -64,7 +64,7 @@ class AppView {
     const buttonResetSettings = new Control(
       settings.node,
       "div",
-      "button",
+      "button button_reset",
       "Reset settings"
     );
     buttonResetSettings.node.onclick = () => {
@@ -90,53 +90,61 @@ class AppView {
   }
 
   private drawSorters() {
-    return [
-      new Sorter(
-        this.settingsInner.node,
-        "sorter",
-        this.controller.getParamSorter(),
+    const paramSorter = this.controller.getParamSorter()
 
-        (id: string) => {
-          this.controller.onSorterChange(id);
-        }
-      ),
-    ];
+    if (paramSorter !== undefined)
+      return [
+        new Sorter(
+          this.settingsInner.node,
+          "sorter",
+          paramSorter,
+
+          (id: string) => {
+            this.controller.onSorterChange(id);
+          }
+        ),
+      ];
+    return []
   }
 
   private drawFilters() {
-    return [
-      new Control(this.settingsInner.node, "h2", "title", "Filter by"),
+    const paramInputRange = this.controller.getParamInputRange();
+    const paramInputValue = this.controller.getParamInputValue()
 
-      new FilterRange(
-        this.settingsInner.node,
-        "settings__filter",
-        this.controller.getParamInputRange(),
+    if (paramInputRange !== undefined && paramInputValue !== undefined) 
+      return [
+        new FilterRange(
+          this.settingsInner.node,
+          "settings__filter",
+          paramInputRange,
 
-        (id: string, value: string, isLeft: boolean) => {
-          const nameValue = isLeft ? "left" : "right";
-          this.controller.onFilterChange(id, value, nameValue);
-        },
+          (id: string, value: string, isLeft: boolean) => {
+            const nameValue = isLeft ? "left" : "right";
+            this.controller.onFilterChange(id, value, nameValue);
+          },
 
-        (id: string, isLeft: boolean) => {
-          const nameValue = isLeft ? "left" : "right";
-          this.controller.onFilterReset(id, nameValue);
-        }
-      ),
+          (id: string, isLeft: boolean) => {
+            const nameValue = isLeft ? "left" : "right";
+            this.controller.onFilterReset(id, nameValue);
+          }
+        ),
 
-      new FilterValue(
-        this.settingsInner.node,
-        "settings__filter",
-        this.controller.getParamInputValue(),
+        new FilterValue(
+          this.settingsInner.node,
+          "settings__filter",
+          paramInputValue,
 
-        (id: string, value: string | boolean, nameValue: string) => {
-          this.controller.onFilterChange(id, value, nameValue);
-        },
+          (id: string, value: string | boolean, nameValue: string) => {
+            this.controller.onFilterChange(id, value, nameValue);
+          },
 
-        (id: string, nameValue: string) => {
-          this.controller.onFilterReset(id, nameValue);
-        }
-      ),
-    ];
+          (id: string, nameValue: string) => {
+            this.controller.onFilterReset(id, nameValue);
+          }
+        ),
+      ];
+
+      return []
   }
 
   public drawGoods(data: readonly IDataItem[]) {

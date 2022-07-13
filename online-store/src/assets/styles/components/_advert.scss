@@ -1,0 +1,22 @@
+.advert {
+  overflow: hidden;
+
+  width: 100%;
+
+  background-color: $sale-bg-color;
+
+  &__inner {
+    display: flex;
+
+    animation: Sale 3s linear infinite;
+
+    div {
+      flex-shrink: 0;
+      width: $itemWidth;
+
+      font-size: 4rem;
+      font-weight: bold;
+      color: $sale-text-color;
+    }
+  }
+}

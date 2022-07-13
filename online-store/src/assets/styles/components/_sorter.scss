@@ -4,6 +4,8 @@
 
   width: 100%;
 
+  background-color: $filter-bg-color;
+
   &__wrapper {
     display: grid;
     grid-template-columns: 10% 1fr;

@@ -5,9 +5,6 @@ import { IDataItem } from "../model/appModel";
 
 export class Card extends Control {
   private content: string
-  // public cardNumber: string;
-
-  // private data: IDataItem;
 
   constructor(
     parent: HTMLElement | null,

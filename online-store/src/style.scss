@@ -1,11 +1,11 @@
 @import '~normalize.css';
 
 //abstracts
+@import './assets/styles/abstracts/variables';
 // @import './assets/styles/abstracts/function';
 @import './assets/styles/abstracts/keyframes';
 @import './assets/styles/abstracts/mixin';
 // @import './assets/styles/abstracts/placeholders';
-@import './assets/styles/abstracts/variables';
 
 //base
 @import './assets/styles/base/base';
@@ -17,8 +17,10 @@
 @import './assets/styles/components/card';
 @import './assets/styles/components/title';
 @import './assets/styles/components/sorter';
+@import './assets/styles/components/search';
 @import './assets/styles/components/filterRange';
 @import './assets/styles/components/filterValue';
+@import './assets/styles/components/advert';
 
 //layout
 @import './assets/styles/layout/container';

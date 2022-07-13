@@ -20,7 +20,7 @@ class Marker extends Control {
 
   onHide() {
     if (this.node.style.opacity === "1") this.node.style.opacity = "0";
-    if (this.node.style.opacity === "0") this.node.style.opacity = "1";
+    else this.node.style.opacity = "1";
   }
 }
 

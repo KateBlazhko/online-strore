@@ -1,5 +1,5 @@
 import Control from "../common/control";
-import { IParamInputValue } from "./options/optionsInputValue";
+import { IParamInputValue } from "../controller/IOptions";
 import InputMultipleValue from "./inputValue";
 
 class FilterValue extends Control {
@@ -12,8 +12,6 @@ class FilterValue extends Control {
   ) {
     super(parent, "div", className);
 
-    // const title = new Control(this.node, 'h2', 'title', 'Фильтрация по значениям')
-
     const filterValue = [
       new Control(this.node, "div", "filter-value"),
       new Control(this.node, "div", "filter-value"),
@@ -22,11 +20,11 @@ class FilterValue extends Control {
     ];
 
     filterValue.map((item, index) => {
-      new Control(item.node, "h3", "title", param[index].filter);
+      new Control(item.node, "h3", "subtitle", param[index].filter);
 
       new InputMultipleValue(
         item.node,
-        "filter-value__input",
+        `filter-value__input filter-value__input_${param[index].filter.toLowerCase()}`,
         param[index],
         onChange,
         onReset

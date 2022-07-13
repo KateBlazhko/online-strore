@@ -1,4 +1,5 @@
 import Control from "../common/control";
+import Advert from "./advert"
 
 class Header extends Control {
   private cart: Control;
@@ -10,9 +11,17 @@ class Header extends Control {
   ) {
     super(parent, "header", className);
 
-    const title = new Control(this.node, "h1", "title", "Online-store");
+    const container = new Control(this.node, "div", "container");
 
-    this.cart = new Control(this.node, "div", "cart", countInCart.toString());
+    const title = new Control(container.node, "h1", "title", "Online-store");
+    const subTitle = new Control(container.node, "h2", "subtitle", "Graphic cards from gaming PC only!");
+
+    this.cart = new Control(container.node, "div", "cart");
+    this.cart.node.innerHTML = `
+    <div class="cart__text"><div>${countInCart.toString()}</div></div>
+    `
+    const advert = new Advert(this.node, "advert");
+
   }
 
   public update(count?: number) {
@@ -21,8 +30,13 @@ class Header extends Control {
       : 0;
 
     if (count == undefined)
-      this.cart.node.textContent = (countLast + 1).toString();
-    else this.cart.node.textContent = count.toString();
+      this.cart.node.innerHTML = `
+      <div class="cart__text"><span>${(countLast + 1).toString()}</span></div>
+      `
+    else 
+      this.cart.node.innerHTML = `
+      <div class="cart__text"><span>${count.toString()}</span></div>
+      `
   }
 }
 

@@ -1,11 +1,27 @@
 .button {
   width: 100%;
+  height: 4rem;
+  border: 2px solid $button-border-color;
+  border-radius: 2rem;
   
+  color: $button-border-color;
   font-size: 2rem;
+  text-align: center;
+  line-height: 4rem;
+
+  background-color: $button-color;
 
   cursor: pointer;
 
   &_remove {
     opacity: 0;
+  }
+
+  &_reset {
+    font-weight: bold;
+    color: $button-color;
+
+    background-color: $button-border-color;
+
   }
 }

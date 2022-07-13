@@ -4,18 +4,14 @@ enum Status {
 }
 
 class Loader {
-  private baseLink: string;
-
-  constructor(baseLink: string) {
-    this.baseLink = baseLink;
-  }
-
+  
   public load<Data>(
+    baseLink: string,
     callback: (data: Data) => void = () => {
       console.error("No callback for GET response");
     }
   ): void {
-    fetch(this.baseLink)
+    fetch(baseLink)
       .then(Loader.errorHandler.bind(Loader))
       .then((res: Response) => {
         const data = res.json() as Promise<Data>;

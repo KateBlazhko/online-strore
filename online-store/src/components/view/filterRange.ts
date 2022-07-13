@@ -1,5 +1,5 @@
 import Control from "../common/control";
-import { IParamInputRange } from "./options/optionsInputRange";
+import { IParamInputRange } from "../controller/IOptions";
 import InputDoubleRange from "./inputDRange";
 
 class FilterRange extends Control {
@@ -12,6 +12,8 @@ class FilterRange extends Control {
   ) {
     super(parent, "div", className);
 
+    new Control(this.node, "h2", "subtitle", "Filter by");
+
     const filterRange = [
       new Control(this.node, "div", "filter-range"),
       new Control(this.node, "div", "filter-range"),
@@ -19,7 +21,7 @@ class FilterRange extends Control {
     ];
 
     filterRange.map((item, index) => {
-      new Control(item.node, "h3", "title", param[index].filter);
+      new Control(item.node, "h3", "subtitle", param[index].filter);
 
       new InputDoubleRange(
         item.node,

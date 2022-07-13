@@ -1,6 +1,6 @@
 import Control from "../common/control";
 import InputRange from "./inputRange";
-import { IParamInputRange } from "./options/optionsInputRange";
+import { IParamInputRange } from "../controller/IOptions";
 import Marker from "./marker";
 import Label from "./label";
 
@@ -78,9 +78,14 @@ class InputDoubleRange extends Control {
 
         marker.onChange(percentNew, value);
 
-        if (value === input.node.max || value === input.node.min)
-          onReset(id, isLeft);
-        else onChange(id, value, isLeft);
+        if (isLeft) {
+          if (value === input.node.min) onReset(id, isLeft);
+          else onChange(id, value, isLeft);
+        } else {
+          if (value === input.node.max) onReset(id, isLeft);
+          else onChange(id, value, isLeft);
+        }
+        
       };
 
       input.node.onmouseenter = () => {
@@ -120,7 +125,7 @@ class InputDoubleRange extends Control {
 
   private setTrackColor() {
     this.inputTrack.node.style.background = `linear-gradient(to right, #dadae5 ${this.percentLeft}%,
-      #3264fe ${this.percentLeft}% , #3264fe ${this.percentRight}%, #dadae5 ${this.percentRight}%)`;
+      #0156FF ${this.percentLeft}% , #0156FF ${this.percentRight}%, #dadae5 ${this.percentRight}%)`;
   }
 
   private update(input: Control<HTMLInputElement>) {

@@ -1,0 +1,31 @@
+.header {
+  @include flex();
+  flex-wrap:wrap;
+
+  .cart {
+    width: 5rem;
+    height: 5rem;
+
+    background-image: url('./assets/icons/cart.png');
+    background-size: cover;
+
+    &__text {
+      @include flex($justify: center, $aling: center);
+      width: 2.7rem;
+      height: 2.7rem;
+      border-radius: 50%;
+      // border: 2px solid $cart-count-color;
+
+      font-size: 2rem;
+      font-weight: bold;
+      line-height: 2rem;
+      // color: $cart-count-color;
+      color: $cart-text-color;
+
+      // background-color: $button-color;
+      background-color: $cart-color;
+
+    }
+  }
+  
+}

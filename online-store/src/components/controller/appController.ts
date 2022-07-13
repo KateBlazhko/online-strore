@@ -1,13 +1,8 @@
 import Loader from "./loader";
 import AppState from "../model/appState";
 import { IDataState, Filter, Sorter } from "../model/appState";
-import { IDataItem } from "../model/appModel";
-import { paramInputRange } from "../view/options/optionsInputRange";
-import { IParamInputValue } from "../view/options/optionsInputValue";
-import { paramInputValue } from "../view/options/optionsInputValue";
-import { paramSorter } from "../view/options/optionsSorter";
 import { Value, Cart } from "../model/appState";
-
+import IOptions from "./IOptions"
 import AppModel from "../model/appModel";
 
 type Callback<Data> = (data: Data) => void;
@@ -20,6 +15,7 @@ class AppController extends Loader {
   private countInCart: number;
   private model: AppModel;
   private _dataState: IDataState;
+  public options: IOptions | null;
 
   get dataState() {
     return this._dataState;
@@ -31,13 +27,14 @@ class AppController extends Loader {
   }
 
   constructor(state: AppState, model: AppModel) {
-    super("assets/json/data.json");
+    super();
     this.state = state;
     this._dataState = this.state.dataState;
     this.filter = this.state.dataState.filter;
     this.sorter = this.state.dataState.sorter;
     this.cart = this.state.dataState.cart;
     this.model = model;
+    this.options = null
     this.countInCart = Object.values(this.cart).reduce(
       (sum, item) => sum + item,
       0
@@ -53,8 +50,8 @@ class AppController extends Loader {
     this.state.onChange.add(onChange);
   }
 
-  public getData(callback: Callback<IDataItem[]>): void {
-    super.load<IDataItem[]>(callback);
+  public getData<T>(baseLink: string, callback: Callback<T>): void {
+    super.load<T>(baseLink, callback);
   }
 
   public addInCart(id: string, count: number) {
@@ -131,6 +128,7 @@ class AppController extends Loader {
   }
 
   public getParamSorter() {
+    const paramSorter = this.options?.paramSorter
     if (this.dataState && Object.keys(this.sorter).length > 0) {
       const key = Object.getOwnPropertyNames(this.sorter)[0];
 
@@ -153,33 +151,38 @@ class AppController extends Loader {
   }
 
   public getParamInputRange() {
-    const paramList = paramInputRange.slice().map((input, index) => {
-      const id = input.id;
-      const arrValue = this.model.data.map((item) => {
-        return isNaN(parseInt(item[id])) ? 0 : parseInt(item[id]);
-      });
-      const min = Math.min(...arrValue).toString();
-      const max = Math.max(...arrValue).toString();
+    if (this.options !== null) {
 
-      if (this.dataState && this.filter[id]) {
-        return {
-          ...paramInputRange[index],
-          value: {
-            ...paramInputRange[index].value,
-            ...this.filter[id],
-          },
-          max: max,
-          min: min,
-        };
-      } else {
-        return {
-          ...paramInputRange[index],
-          max: max,
-          min: min,
-        };
-      }
-    });
-    return paramList;
+      const paramInputRange = this.options.paramInputRange
+      const paramList = paramInputRange.slice().map((input, index) => {
+        const id = input.id;
+        const arrValue = this.model.data.map((item) => {
+          return isNaN(parseInt(item[id])) ? 0 : parseInt(item[id]);
+        });
+        const min = Math.min(...arrValue).toString();
+        const max = Math.max(...arrValue).toString();
+
+        if (this.dataState && this.filter[id]) {
+          return {
+            ...paramInputRange[index],
+            value: {
+              ...paramInputRange[index].value,
+              ...this.filter[id],
+            },
+            max: max,
+            min: min,
+          };
+        } else {
+          return {
+            ...paramInputRange[index],
+            max: max,
+            min: min,
+          };
+        }
+      });
+      return paramList;
+
+    }
   }
 
   public onFilterChange(
@@ -227,53 +230,58 @@ class AppController extends Loader {
   }
 
   getParamInputValue() {
-    const paramList: IParamInputValue[] = paramInputValue
-      .slice()
-      .map((input, index) => {
-        const id = input.id;
+    if (this.options != null) {
 
-        const values: Value = this.model.data
-          .reduce((res: string[], item) => {
-            if (typeof item[id] === "boolean") {
-              if (res.includes("")) return res;
+      const paramInputValue = this.options.paramInputValue
+      const paramList = paramInputValue
+        .slice()
+        .map((input, index) => {
+          const id = input.id;
 
-              res.push("");
+          const values: Value = this.model.data
+            .reduce((res: string[], item) => {
+              if (typeof item[id] === "boolean") {
 
+                if (res.includes("")) return res;
+                res.push("");
+                return res;
+
+              }
+              if (res.includes(item[id])) return res;
+
+              res.push(item[id])
               return res;
-            }
+            }, [])
 
-            if (res.includes(item[id])) return res;
+            .reduce((obj, item) => {
+              return {
+                ...obj,
+                [item]: false,
+              };
+            }, {});
 
-            res.push(item[id]);
-            return res;
-          }, [])
-          .reduce((obj, item) => {
+          if (this.dataState && this.filter[id]) {
             return {
-              ...obj,
-              [item]: false,
+              ...paramInputValue[index],
+              value: {
+                ...paramInputValue[index].value,
+                ...values,
+                ...this.filter[id],
+              },
             };
-          }, {});
+          } else {
+            return {
+              ...paramInputValue[index],
+              value: {
+                ...paramInputValue[index].value,
+                ...values,
+              },
+            };
+          }
+        });
+      return paramList;
 
-        if (this.dataState && this.filter[id]) {
-          return {
-            ...paramInputValue[index],
-            value: {
-              ...paramInputValue[index].value,
-              ...values,
-              ...this.filter[id],
-            },
-          };
-        } else {
-          return {
-            ...paramInputValue[index],
-            value: {
-              ...paramInputValue[index].value,
-              ...values,
-            },
-          };
-        }
-      });
-    return paramList;
+    }
   }
 }
 

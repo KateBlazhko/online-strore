@@ -1,5 +1,5 @@
 import Control from "../common/control";
-import { IParamInputRange } from "./options/optionsInputRange";
+import { IParamInputRange } from "../controller/IOptions";
 
 class InputRange extends Control<HTMLInputElement> {
   constructor(

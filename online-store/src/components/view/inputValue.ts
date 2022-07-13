@@ -1,5 +1,5 @@
 import Control from "../common/control";
-import { IParamInputValue } from "./options/optionsInputValue";
+import { IParamInputValue } from "../controller/IOptions";
 import InputControl from "./inputControl";
 import Label from "./label";
 
@@ -21,7 +21,7 @@ class InputMultipleValue extends Control {
       if (typeof checked === "boolean") {
         const input = new InputControl(
           this.node,
-          "filter-value__checkbox",
+          `checkbox`,
           "checkbox",
           id,
           key,
@@ -35,7 +35,10 @@ class InputMultipleValue extends Control {
           }
         };
 
-        const label = new Label(this.node, "filter-value__label", key, id);
+        const label = new Label(this.node,
+          `label`,
+          key
+        );
       }
     }
   }
