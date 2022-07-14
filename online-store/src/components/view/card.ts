@@ -49,14 +49,16 @@ export class Card extends Control {
     const buttonAddCart = new Control(
       this.node,
       "div",
-      "button",
+      "button button_add",
       "Add to cart"
     );
+
+    new Control(buttonAddCart.node,"div","logo logo_card");
+
     const buttonRemoveCart = new Control(
       this.node,
       "div",
-      "button button_remove",
-      "Remove from cart"
+      "button button_remove"
     );
 
     if (isInCart) {

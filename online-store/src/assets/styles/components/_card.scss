@@ -1,4 +1,6 @@
 .card {
+  position: relative;
+  
   @include flex($justify: center);
   flex-wrap: wrap;
   gap: 1rem;

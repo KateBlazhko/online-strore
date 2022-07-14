@@ -1,0 +1,15 @@
+.logo {
+  width: 6rem;
+  padding-bottom: 6rem;
+  background-image: url('./assets/icons/logo.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &_card {
+    width: 4rem;
+    padding-bottom: 4rem;
+    background-image: url('./assets/icons/cartblue.svg');
+    background-size: cover;
+    background-position: center;
+  }
+}

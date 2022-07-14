@@ -5,7 +5,7 @@
   justify-content: $justify;
 }
 
-@mixin autoGrid ($minmax: 22rem) {
+@mixin autoGrid ($minmax: 25rem) {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax($minmax, 1fr)); 
 
@@ -47,7 +47,7 @@
     z-index: 0;
 
     width: $width;
-    height: 0.5rem;
+    height: 0.2rem;
 
     transform: translateX(-50%);
   }

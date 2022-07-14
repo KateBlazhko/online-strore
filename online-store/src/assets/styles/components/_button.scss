@@ -14,7 +14,31 @@
   cursor: pointer;
 
   &_remove {
+    position: absolute;
+    right: 0;
+
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    border: 2px solid $button-hover-color;
+
+    color: $button-color;
+
+    background-color: $button-hover-color;
+    background-image: url('./assets/icons/check.svg');
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+
     opacity: 0;
+
+    &:hover {
+      content: '';
+      border: 2px solid $button-remove-hover-color;
+
+      background-color: $button-remove-hover-color;
+      background-image: url(./assets/icons/close.svg);
+    }
   }
 
   &_reset {
@@ -31,4 +55,8 @@
       background-color: $button-hover-color;
     }
   }
+
+  &_add {
+    @include flex($justify: center, $aling: center, $direction: row-reverse)
+  } 
 }
