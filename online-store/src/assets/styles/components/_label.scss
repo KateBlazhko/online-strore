@@ -1,0 +1,39 @@
+.label {
+  display: block;
+
+  width: 100%;
+  padding: 0.5rem 1rem;
+
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+
+  cursor: pointer;
+
+  &_chipmaker,
+  &_vendor {  
+    font-size: 0; 
+
+    background-color: $filter-logo-color;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+
+    filter: $filter-color;
+      -webkit-filter: grayscale(1);
+    transition: all 0.5s ease-in-out; 
+
+    &:hover {
+      background-size: 60%;
+    }
+  }
+
+  &_sort {
+    padding: 1rem;
+
+    // line-height: 3em;
+
+    &:hover {
+      background-color: $sorter-border-color
+    }
+  }
+}

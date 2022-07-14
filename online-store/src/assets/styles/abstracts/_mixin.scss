@@ -8,6 +8,7 @@
 @mixin autoGrid ($minmax: 22rem) {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax($minmax, 1fr)); 
+
   grid-gap: 3em;
 
   width: 100%;

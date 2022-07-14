@@ -18,10 +18,17 @@
   }
 
   &_reset {
+    width: 70%;
+
     font-weight: bold;
     color: $button-color;
 
     background-color: $button-border-color;
 
+    &:hover {
+      border: 2px solid $button-hover-color;
+
+      background-color: $button-hover-color;
+    }
   }
 }

@@ -4,57 +4,69 @@
 
   width: 100%;
 
-  &__input {
-    display: grid;
-    grid-template-columns: 100%;
-
-    width: 100%;
-
-    &_chipmaker,
-    &_vendor {
-      grid-template-columns: 50% 50%;
-
-      .label { 
-        display: block;
-  
-        width: 10rem;
-        padding-bottom: 40%;
-  
-        cursor: pointer;
-  
-        font-size: 0; 
-  
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-  
-        filter: $filter-color;
-          -webkit-filter: grayscale(1);
-        transition: all 0.5s ease-in-out; 
-  
-        &:hover {
-          transform: scale(1.1);
-        }
-      }
-
-      .checkbox:checked + .label {
-        filter: none;
-        -webkit-filter: grayscale(0);
-        transform: scale(1.1);
-      }
-    }
-
-    // &_gpu {
-
-    // }
-  }
-
   .checkbox {
     position: absolute;
     opacity: 0;
   }
 
-  // &__label {
+  &__input {
+    display: grid;
+    grid-template-columns: 100%;
+    align-content: center;
+    width: 100%;
 
-  // }
+
+    &_chipmaker,
+    &_vendor {
+      grid-template-columns: 1fr 1fr ;
+
+      grid-auto-rows: 7rem;
+      justify-items: center;
+      gap: 0.1rem;
+
+      background-color: $filter-bg-color;
+
+      .checkbox:checked + .label {
+        filter: none;
+        -webkit-filter: grayscale(0);
+        background-size: 60%;
+      }
+    }
+
+    &_gpu,
+    &_popular {
+      gap: 1rem;
+
+      .checkbox {
+   
+        & + .label:before {
+          content: '';
+          margin-right: 1rem;
+          display: inline-block;
+          width: 2rem;
+          height: 2rem;
+          border: 2px solid $checkbox-border-color;
+
+          vertical-align: text-top;
+
+          background-color: $checkbox-bg-color;
+
+          transition: all 0.2s linear;
+        }
+    
+        &:hover + .label:before {
+          border: 2px solid $checkbox-checked-color;
+        }
+    
+        &:checked + .label:before {
+          border: 2px solid $checkbox-checked-color;
+
+          background-color: $checkbox-checked-color;
+          background-image: url('./assets/icons/check.svg');
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+      }
+    }
+  }
 }

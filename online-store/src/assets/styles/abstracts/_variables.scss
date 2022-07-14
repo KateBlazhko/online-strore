@@ -1,14 +1,34 @@
-$input-thumb-color: #0156FF;
+$input-thumb-color: #647abd;
 $input-track-color: #F1EFEF;
 $blackout: #29292999;
 $sale-bg-color: #FF0000;
 $sale-text-color: #FFFFFF;
+
 $filter-color: #808080;
-$filter-bg-color: #F5F7FF;
+$filter-bg-color: #f3f5fa;
+$filter-logo-color: #FFFFFF;
+
 $button-color: #FFFFFF;
-$button-border-color: #0156FF;
-$cart-color: #0156FF;
+$button-border-color: #647abd;
+$button-hover-color: #50bb78;
+
+$cart-count-color: #647abd;
 $cart-text-color: #FFFFFF;
+
+$checkbox-checked-color: #50bb78;
+$checkbox-bg-color: #FFFFFF;
+$checkbox-border-color: #cbd1e4;
+
+$search-focus-color:#647abd;
+$search-bg-color: #f3f5fa;
+$search-border-color: #cbd1e4;
+$search-hover-color: #50bb78;
+$search-input-color: #FFFFFF;
+
+$search-bg-color: #f3f5fa;
+$sorter-border-color: #cbd1e4;
+$sorter-hover-color: #50bb78;
+$sorter-wrap-color: #FFFFFF;
 
 $desctop: 1280px;
 $laptop: 1024px;
@@ -16,3 +36,5 @@ $tablet: 768px;
 $mobile: 320px;
 
 $itemWidth: 300px;
+
+$settings-padding: 2rem 3rem

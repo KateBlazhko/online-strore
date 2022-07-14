@@ -125,7 +125,7 @@ class InputDoubleRange extends Control {
 
   private setTrackColor() {
     this.inputTrack.node.style.background = `linear-gradient(to right, #dadae5 ${this.percentLeft}%,
-      #0156FF ${this.percentLeft}% , #0156FF ${this.percentRight}%, #dadae5 ${this.percentRight}%)`;
+      #647abd ${this.percentLeft}% , #647abd ${this.percentRight}%, #dadae5 ${this.percentRight}%)`;
   }
 
   private update(input: Control<HTMLInputElement>) {

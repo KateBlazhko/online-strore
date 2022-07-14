@@ -1,15 +1,44 @@
 .header {
   @include flex();
   flex-wrap:wrap;
+  gap: 1rem;
+
+  padding: 1rem;
+
+  .container {
+    align-items: center;
+  }
+
+  &__title {
+    @include flex ($aling: center);
+
+    color: $cart-count-color;
+  }
+
+  .logo {
+    width: 6rem;
+    padding-bottom: 6rem;
+    background-image: url('./assets/icons/logo.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    // background-position: center;
+  }
 
   .cart {
-    width: 5rem;
-    height: 5rem;
+    position: relative;
 
-    background-image: url('./assets/icons/cart.png');
-    background-size: cover;
+    width: 6rem;
+    height: 6rem;
+
+    background-image: url('./assets/icons/cart.svg');
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center;
 
     &__text {
+      position: absolute;
+      right: -1rem;
+
       @include flex($justify: center, $aling: center);
       width: 2.7rem;
       height: 2.7rem;
@@ -23,7 +52,7 @@
       color: $cart-text-color;
 
       // background-color: $button-color;
-      background-color: $cart-color;
+      background-color: $cart-count-color;
 
     }
   }

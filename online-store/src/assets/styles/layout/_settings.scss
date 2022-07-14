@@ -1,7 +1,7 @@
 .settings {
-  @include flex();
+  @include flex($justify: center);
   flex-wrap: wrap;
-  flex-basis: 20%;
+  flex-basis: 25%;
   gap: 1rem;
 
   &__inner {
@@ -16,6 +16,7 @@
     flex-wrap: wrap;
     gap: 1rem;
     flex-basis: 100%;
+    padding: $settings-padding;
 
     background-color: $filter-bg-color;
   }

@@ -3,13 +3,70 @@
   flex-wrap: wrap;
 
   width: 100%;
+  padding: $settings-padding;
 
   background-color: $filter-bg-color;
 
-  &__wrapper {
-    display: grid;
-    grid-template-columns: 10% 1fr;
+  &__title {
+    @include flex($aling: center);
+    gap: 1rem;
 
     width: 100%;
+    padding: 0 1rem;
+    border: 2px solid $sorter-border-color;
+
+    background-color: $sorter-wrap-color;
+
+    &:hover {
+      border: 2px solid $sorter-hover-color
+    }
+  }
+
+  &__type {
+    font-size: 1.8rem;
+  }
+
+  &__button {
+    width: 3rem;
+    height: 3rem;
+
+    background-image: url('./assets/icons/sort.svg');
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+
+    transform: rotate(0);
+
+    transition: rotate 0.5s linear;
+
+    cursor: pointer;
+
+    &.open {
+      transform: rotate(180deg);
+    }
+
+    &:hover {
+      background-color: $sorter-border-color;
+    }
+  }
+
+  &__wrapper {
+    overflow: hidden;
+    @include flex();
+    flex-wrap: wrap;
+    width: 100%;
+    height: 0;
+
+    background-color: $sorter-wrap-color;
+
+    transition: all 0.5s;
+
+    &.open {
+      height: calc(3.6rem * 6);
+    }
+  }
+
+  &__input {
+    display: none;
   }
 }

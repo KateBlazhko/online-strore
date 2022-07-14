@@ -35,8 +35,8 @@ class InputMultipleValue extends Control {
           }
         };
 
-        const label = new Label(this.node,
-          `label`,
+        new Label(this.node,
+          `label label_${id}`,
           key
         );
       }

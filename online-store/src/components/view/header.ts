@@ -13,8 +13,12 @@ class Header extends Control {
 
     const container = new Control(this.node, "div", "container");
 
-    const title = new Control(container.node, "h1", "title", "Online-store");
-    const subTitle = new Control(container.node, "h2", "subtitle", "Graphic cards from gaming PC only!");
+    const title = new Control(container.node, "div", "header__title");
+
+    new Control(title.node, "div", "logo");
+    new Control(title.node, "h1", "title", "Online-store");
+    
+    new Control(container.node, "h2", "subtitle", "Used graphic cards from gaming PC only!");
 
     this.cart = new Control(container.node, "div", "cart");
     this.cart.node.innerHTML = `

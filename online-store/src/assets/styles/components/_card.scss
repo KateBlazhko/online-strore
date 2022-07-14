@@ -1,6 +1,7 @@
 .card {
   @include flex($justify: center);
   flex-wrap: wrap;
+  gap: 1rem;
 
   padding: 0 20px;
 
