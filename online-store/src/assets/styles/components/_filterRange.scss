@@ -1,14 +1,16 @@
 .filter-range {
 
-  width: 90%;
+  width: 100%;
 
   .input-range {
-
+    @include flex();
     width: 100%;
     min-height: 10rem;
+    padding: 1rem;
     
-    @include imput-range-two-thumb(6rem, $input-track-color,  $input-thumb-color);
+    @include imput-range-two-thumb(5rem, 80%, $input-track-color,  $input-thumb-color, $filter-hover-color);
 
+    background-color: $filter-logo-color;
   }
 
 }

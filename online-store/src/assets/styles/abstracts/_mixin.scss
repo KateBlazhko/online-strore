@@ -14,7 +14,7 @@
   width: 100%;
 }
 
-@mixin thumb ($color, $thumb-size) {
+@mixin thumb ($color, $hover-color, $thumb-size) {
   position: relative;
     
   width: $thumb-size;
@@ -28,55 +28,69 @@
   cursor: pointer;
 
   appearance: none;
+
+  transition: all 0.5s linear;
+  &:hover {
+    background-color: $hover-color;
+  }
 }
 
-@mixin imput-range-two-thumb ($input-top, $input-bg-color, $input-thumb-color, $thumb-size: 2rem) {
+@mixin imput-range-two-thumb ($input-top, $width, $input-bg-color, $input-thumb-color,
+  $input-thumb-hover, $thumb-size: 2rem) {
+
   position: relative;
 
   &__track {
     position: absolute;
-    left: 0;
-    top: $input-top;
+    left: 50%;
+    top: 65%;
     z-index: 0;
 
-    width: 100%;
+    width: $width;
     height: 0.5rem;
+
+    transform: translateX(-50%);
   }
 
   &__label {
     display: block;
+
+    user-select: none;
   }
 
   &__wrap {
-    position: relative;
+    position: absolute;
+    left: 50%;
 
-    width: calc(100% - $thumb-size);
+    width: calc($width - $thumb-size);
+
+    transform: translateX(-50%);
   }
 
   &__title {
     position: absolute;
     left: 0;
-    top: $input-top - 3rem;
+    top: 2.5rem;
 
     width: $thumb-size * 2;
     height: $thumb-size;
 
     text-align: center;
+    font-size: 1.6rem;
+    color: $input-thumb-hover;
 
-    background-color: $input-track-color;
-
-    transform: translateX(-25%);
+    transform: translateX(-50%);
     opacity: 0;
 
-    transition: opacity 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: opacity 0.5s linear;
   }
     
   input[type="range"] {
     position: absolute;
-    left: 0;
-    top: $input-top;
+    left: 50%;
+    top: 65%;
 
-    width: 100%;
+    width: $width;
 
     background-color: transparent;
 
@@ -85,16 +99,18 @@
     height: 0.5rem;
     appearance: none;
 
+    transform: translateX(-50%);
+
     &:focus {
       outline: none; 
     }
 
     &::-webkit-slider-thumb {
-      @include thumb ($input-thumb-color, $thumb-size)
+      @include thumb ($input-thumb-color, $input-thumb-hover, $thumb-size)
     }
 
     &::-moz-range-thumb {
-      @include thumb ($input-thumb-color, $thumb-size)
+      @include thumb ($input-thumb-color, $input-thumb-hover, $thumb-size)
     } 
 
     &::-moz-range-track {

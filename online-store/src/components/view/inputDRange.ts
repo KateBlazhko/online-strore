@@ -57,7 +57,7 @@ class InputDoubleRange extends Control {
 
       const label = new Label(
         this.node,
-        "input-range__label",
+        "input-range__label label label_range",
         input.node.value,
         input.node.id
       );

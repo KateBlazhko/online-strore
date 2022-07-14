@@ -7,7 +7,7 @@
 
   background-color: $filter-bg-color;
 
-  &__title {
+  &__choice {
     @include flex($aling: center);
     gap: 1rem;
 

@@ -15,11 +15,17 @@ class Sorter extends Control {
     onChange: (id: string) => void
   ) {
     super(parent, "div", className);
+    new Control(this.node, "h2", "subtitle", "Sort by");
 
-    const title = new Control(this.node, "div", "sorter__title");
-      new Control(title.node, "h2", "subtitle", "Sort by");
-      this.type = new Control(title.node, "div", "sorter__type");
-      const sortButton = new Control(title.node, "div", "sorter__button");
+    const choiceType = new Control(this.node, "div", "sorter__choice");
+
+      let content = ''
+      for (const key in param) {
+        if (param[key]) content = key.split(".")[0];
+      }
+      
+      this.type = new Control(choiceType.node, "div", "sorter__type", content);
+      const sortButton = new Control(choiceType .node, "div", "sorter__button");
 
     const sorterWrap = new Control(this.node, "div", "sorter__wrapper");
 

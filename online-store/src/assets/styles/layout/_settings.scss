@@ -2,6 +2,7 @@
   @include flex($justify: center);
   flex-wrap: wrap;
   flex-basis: 25%;
+  min-width: 25rem;
   gap: 1rem;
 
   &__inner {
