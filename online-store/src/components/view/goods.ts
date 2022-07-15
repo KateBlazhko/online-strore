@@ -52,7 +52,7 @@ class Goods extends Control {
           this.node,
           "p",
           "goods__text",
-          "Ничего не найдено"
+          "Sorry, nothing found..."
         );
     }
   }

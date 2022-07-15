@@ -20,11 +20,6 @@ class Search extends Control {
         onSearch(value);
       }
     };
-
-    // const buttonSearch = new Control(this.node, "div", "button", "Search")
-    // buttonSearch.node.onclick = () => {
-
-    // }
   }
 }
 

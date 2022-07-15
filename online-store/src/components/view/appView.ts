@@ -152,7 +152,6 @@ class AppView {
 
   public drawGoods(data: readonly IDataItem[]) {
     const [cardsInCart] = this.controller.getParamCart();
-console.log(cardsInCart)
     this.goods.update(data, cardsInCart);
   }
 
