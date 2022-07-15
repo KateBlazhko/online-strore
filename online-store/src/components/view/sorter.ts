@@ -25,7 +25,7 @@ class Sorter extends Control {
       }
       
       this.type = new Control(choiceType.node, "div", "sorter__type", content);
-      const sortButton = new Control(choiceType .node, "div", "sorter__button");
+      const sorterIcon = new Control(choiceType .node, "div", "sorter__icon");
 
     const sorterWrap = new Control(this.node, "div", "sorter__wrapper");
 
@@ -48,12 +48,12 @@ class Sorter extends Control {
 
       const label = new Label(sorterWrap.node, "label label_sort", id, id);
       label.node.onclick = () => {
-        func.toggleClassName('open', sorterWrap.node, sortButton.node)
+        func.toggleClassName('open', sorterWrap.node, sorterIcon.node)
       }
     }
 
-    sortButton.node.onclick = () => {
-      func.toggleClassName('open', sorterWrap.node, sortButton.node)
+    choiceType.node.onclick = () => {
+      func.toggleClassName('open', sorterWrap.node, sorterIcon.node)
     }
   }
 

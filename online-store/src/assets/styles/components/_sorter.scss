@@ -26,7 +26,7 @@
     font-size: 1.8rem;
   }
 
-  &__button {
+  &__icon {
     width: 3rem;
     height: 3rem;
 
@@ -43,10 +43,6 @@
 
     &.open {
       transform: rotate(180deg);
-    }
-
-    &:hover {
-      background-color: $sorter-border-color;
     }
   }
 
