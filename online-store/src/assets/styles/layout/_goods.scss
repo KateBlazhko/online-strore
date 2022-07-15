@@ -7,4 +7,10 @@
   &__card-wrapper {
     @include autoGrid();
   }
+
+  &__text {
+    width: 100%;
+
+    font-size: 2rem;
+  }
 }

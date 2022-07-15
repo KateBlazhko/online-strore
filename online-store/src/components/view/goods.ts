@@ -50,7 +50,7 @@ class Goods extends Control {
       if (!this.text)
         this.text = new Control(
           this.node,
-          "h2",
+          "p",
           "goods__text",
           "Ничего не найдено"
         );

@@ -75,11 +75,14 @@ class AppView {
       this.goods = new Goods(
         container.node,
         "goods",
-        cardsInCart,
+        [],
         this.onCartUp,
         this.onCartDown
       );
+
       this.controller.onResetAll();
+      const [_cardsInCart, countInCart] = this.controller.getParamCart();
+      this.header.update(countInCart);
       this.sortersList = this.drawSorters();
       this.filtersList = this.drawFilters();
     };
@@ -149,7 +152,7 @@ class AppView {
 
   public drawGoods(data: readonly IDataItem[]) {
     const [cardsInCart] = this.controller.getParamCart();
-
+console.log(cardsInCart)
     this.goods.update(data, cardsInCart);
   }
 

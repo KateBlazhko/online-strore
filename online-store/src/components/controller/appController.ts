@@ -23,6 +23,13 @@ class AppController extends Loader {
 
   set dataState(value: IDataState) {
     this._dataState = value;
+
+    this.cart = value.cart;
+    this.countInCart = Object.values(this.cart).reduce(
+      (sum, item) => sum + item,
+      0
+    );
+    
     this.model.filterData(this._dataState);
   }
 
@@ -43,8 +50,7 @@ class AppController extends Loader {
     const onChange = (dataState: IDataState) => {
       this.dataState = dataState;
       this.filter = this.dataState.filter;
-      this.sorter = this.dataState.sorter;
-      this.cart = this.dataState.cart;
+      this.sorter = this.dataState.sorter;      
     };
 
     this.state.onChange.add(onChange);
