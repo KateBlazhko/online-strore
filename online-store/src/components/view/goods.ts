@@ -23,11 +23,11 @@ class Goods extends Control {
     this.onCartUp = onCartUp;
     this.onCartDown = onCartDown;
 
-    const title = new Control(this.node, "h2", "subtitle", "Our goods for you");
+    new Control(this.node, "h2", "title title_goods", "Our goods for you");
 
     this.text = new Control(
       this.node,
-      "h2",
+      "p",
       "goods__text",
       "Sorry, nothing found..."
     );

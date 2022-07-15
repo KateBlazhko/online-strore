@@ -11,8 +11,12 @@
 
   &__title {
     @include flex ($aling: center);
-
+    gap: 0.5rem;
     color: $cart-count-color;
+
+    .logo {
+      flex-shrink: 0;
+    }
   }
 
   .cart {

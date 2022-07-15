@@ -4,7 +4,7 @@
 	left: 0;
 	z-index: 3;
 
-  @include flex($justify: center);
+  @include flex($justify: center, $aling: center);
   
 	width: 100%;
 	height: 100vh;
@@ -16,82 +16,21 @@
 	animation: Change-opacity 1s;
 	animation-fill-mode: forwards;
 	animation-direction: normal;
+
 }
 
-.notification__wrapper {
-	@include flex($direction: column);
-	width: 952px;
+.notification__inner {
+	// overflow: hidden;
+	@include flex($justify: center, $aling: center);
+	// align-self: flex-start;
+	width: 30rem;
+	height: 10rem;
+	border-radius: 5px;
 
-	background-color: transparent;
+	background-color: $button-remove-hover-color;
 
-		@media (max-width: ($desctop - 1px)) {
-			width: 682px;
-		}
-
-		@media (max-width: ($tablet - 1px)) {
-			width: 270px;
-		}
-
-		// .notification_close-button {
-		// 	align-self: flex-end;
-		// 	@include button ($width: 52px, $border: 2px solid $color-primary,
-		// 		$color-bg: transparent, $color: $color-dark-3xl); 
-				
-		// 	@include font ($weight: bold, $size: 30px);
-		// 	color: $color-dark-3xl;
-
-		// 	background-image: url(../assets/icons/Vector.svg);
-		// 	background-repeat: no-repeat;
-		// 	background-position: center;
-
-		// 	&.hover {
-		// 		cursor: pointer;
-
-		// 		border: 2px solid $color-primary-light;
-			
-		// 		background-color: $color-primary-light;
-		// 	}
-
-		// }
-
-		.notification__container {
-			overflow: hidden;
-			@include flex();
-			align-self: flex-start;
-			width: calc(100% - 52px);
-			border-radius: 9px;
-
-			// background-color: $color-light-s;
-
-			@media (max-width: ($tablet - 1px)) {
-				width: calc(100% - 30px);
-			}
-
-			.notification__text {
-				align-self: flex-start;
-				@include flex($aling: flex-start, $direction: column);
-				gap: 10px;
-
-				width: 400px;
-				padding: 50px 20px 0 30px;
-
-				@media (max-width: ($desctop - 1px)) {
-					width: 280px;
-					padding: 10px 9px 10px 11px;
-				}
-
-				@media (max-width: ($tablet - 1px)) {
-					width: 100%;
-				}
-
-				.title {
-					font-size: 35px;
-					// color: $color-dark-3xl;
-
-					@media (max-width: ($tablet - 1px)) {
-						align-self: center;
-					}
-				}
-			}
-		}
+	.notification__text {
+		font-size: 3rem;
+		color: $sale-text-color
+	}
 }

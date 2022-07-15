@@ -9,49 +9,29 @@ class Notification extends Control {
     className: string,
     notification: string
   ) {
-    super(parent, className);
+    super(parent, "div", className);
     this.onClose = () => {};
 
     const overlay = new Control(this.node, "div", "notification__overlay");
-    const wrapper = new Control(overlay.node, "div", "notification__wrapper");
-    const closeButton = new Control(
-      wrapper.node,
-      "div",
-      "notification__close-button"
-    );
+
     const container = new Control(
-      wrapper.node,
+      overlay.node,
       "div",
-      "notification__container"
+      "notification__inner"
     );
     const text = new Control(
       container.node,
-      "div",
+      "span",
       "notification__text",
       notification
     );
 
-    closeButton.node.onclick = () => {
-      this.onClose();
-    };
+    setTimeout(() => this.onClose(), 1500)
 
     overlay.node.onclick = () => {
       this.onClose();
     };
 
-    overlay.node.onmouseover = () => {
-      func.toggleClassName("hover", closeButton.node);
-    };
-
-    overlay.node.onmouseout = () => {
-      func.toggleClassName("hover", closeButton.node);
-    };
-
-    container.node.onclick = (event) => event.stopPropagation();
-
-    container.node.onmouseover = (event) => event.stopPropagation();
-
-    container.node.onmouseout = (event) => event.stopPropagation();
   }
 }
 

@@ -2,6 +2,7 @@
   @include flex();
   flex-wrap: wrap;
   flex-basis: 70%;
+  gap: 2rem;
 
   &__card-wrapper {
     @include autoGrid();

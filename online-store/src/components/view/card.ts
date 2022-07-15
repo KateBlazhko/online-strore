@@ -27,12 +27,12 @@ export class Card extends Control {
     <div class="card__content">Chipmaker: <span>${data.chipmaker}</span></div>
     <div class="card__content">Year: <span>${data.release}</span></div>
     <div class="card__content">Count: <span>${count.toString()}</span></div>
-    <div class="card__content">Price: <span>${data.price}BYN</span></div>`
+    <div class="card__content card__content_price">${data.price}BYN</div>`
 
     const buttonDetails = new Control(
       this.node,
       "div",
-      "button",
+      "button button_details",
       "View details"
     );
     buttonDetails.node.onclick = () => {

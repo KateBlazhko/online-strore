@@ -5,7 +5,9 @@
   flex-wrap: wrap;
   gap: 1rem;
 
-  padding: 0 20px;
+  padding: 2rem;
+
+  background-color: $card-bg-color;
 
   &__img {
     width: 100%;
@@ -19,9 +21,18 @@
     width: 100%;
 
     font-weight: bold;
+    font-size: 2rem;
 
     span {
       font-weight: normal;
     }
+  }
+
+  &__content_price {
+    padding-top: 1rem;
+    padding-left: calc(100% - 10rem);
+
+    font-size: 2.5rem;
+    color: $card-price-color;
   }
 }

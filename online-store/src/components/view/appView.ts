@@ -162,10 +162,11 @@ class AppView {
     }
 
     const notification = new Notification(
-      this.header.node,
+      document.body,
       "notification",
       isAdd
     );
+
     notification.onClose = () => {
       notification.node.remove();
     };
