@@ -1,6 +1,6 @@
 import AppController from "../controller/appController";
 import AppModel, { IDataItem } from "../model/appModel";
-import IOptions from "../controller/IOptions"
+import IOptions from "../controller/IOptions";
 import AppView from "../view/appView";
 import AppState from "../model/appState";
 
@@ -16,11 +16,11 @@ class App {
   }
 
   public start() {
-    this.controller.getData<IOptions>("assets/json/options.json", (data) => {
+    AppController.getData<IOptions>("assets/json/options.json", (data) => {
       this.controller.options = data;
     });
 
-    this.controller.getData<IDataItem[]>("assets/json/data.json", (data) => {
+    AppController.getData<IDataItem[]>("assets/json/data.json", (data) => {
       this.model.data = data;
       const view = new AppView(this.model, this.controller);
       this.model.filterData(this.state.dataState);

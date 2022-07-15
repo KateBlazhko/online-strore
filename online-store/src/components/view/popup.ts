@@ -15,8 +15,8 @@ class Popup extends Control {
     const closeButton = new Control(wrapper.node, "div", "popup__close-button");
     const container = new Control(wrapper.node, "div", "popup__container");
 
-    const popupImg = new Control (container.node, 'div', 'popup__img');
-    		popupImg.node.style.backgroundImage = `url(./assets/img/${data.image})`;
+    const popupImg = new Control(container.node, "div", "popup__img");
+    popupImg.node.style.backgroundImage = `url(./assets/img/${data.image})`;
 
     const popupData = new Control(container.node, "ul", "popup__list");
     popupData.node.innerHTML = `
@@ -29,7 +29,7 @@ class Popup extends Control {
     <li class="popup__item">Other: <span>${data.other}</span></li>
     <li class="popup__item">Count: <span>${data.quantity.toString()}</span></li>
     <li class="popup__item">Popular: <span>${data.popular}</span></li>
-    <li class="popup__item">Price: <span>${data.price}BYN</span></li>`
+    <li class="popup__item">Price: <span>${data.price}BYN</span></li>`;
 
     closeButton.node.onclick = () => {
       this.onClose();

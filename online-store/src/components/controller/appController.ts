@@ -2,12 +2,12 @@ import Loader from "./loader";
 import AppState from "../model/appState";
 import { IDataState, Filter, Sorter } from "../model/appState";
 import { Value, Cart } from "../model/appState";
-import IOptions from "./IOptions"
+import IOptions from "./IOptions";
 import AppModel from "../model/appModel";
 
 type Callback<Data> = (data: Data) => void;
 
-class AppController extends Loader {
+class AppController {
   private state: AppState;
   private filter: Filter;
   private sorter: Sorter;
@@ -29,19 +29,18 @@ class AppController extends Loader {
       (sum, item) => sum + item,
       0
     );
-    
+
     this.model.filterData(this._dataState);
   }
 
   constructor(state: AppState, model: AppModel) {
-    super();
     this.state = state;
     this._dataState = this.state.dataState;
     this.filter = this.state.dataState.filter;
     this.sorter = this.state.dataState.sorter;
     this.cart = this.state.dataState.cart;
     this.model = model;
-    this.options = null
+    this.options = null;
     this.countInCart = Object.values(this.cart).reduce(
       (sum, item) => sum + item,
       0
@@ -50,14 +49,14 @@ class AppController extends Loader {
     const onChange = (dataState: IDataState) => {
       this.dataState = dataState;
       this.filter = this.dataState.filter;
-      this.sorter = this.dataState.sorter;      
+      this.sorter = this.dataState.sorter;
     };
 
     this.state.onChange.add(onChange);
   }
 
-  public getData<T>(baseLink: string, callback: Callback<T>): void {
-    super.load<T>(baseLink, callback);
+  public static getData<T>(baseLink: string, callback: Callback<T>): void {
+    Loader.load<T>(baseLink, callback);
   }
 
   public addInCart(id: string, count: number) {
@@ -134,7 +133,7 @@ class AppController extends Loader {
   }
 
   public getParamSorter() {
-    const paramSorter = this.options?.paramSorter
+    const paramSorter = this.options?.paramSorter;
     if (this.dataState && Object.keys(this.sorter).length > 0) {
       const key = Object.getOwnPropertyNames(this.sorter)[0];
 
@@ -158,8 +157,7 @@ class AppController extends Loader {
 
   public getParamInputRange() {
     if (this.options !== null) {
-
-      const paramInputRange = this.options.paramInputRange
+      const paramInputRange = this.options.paramInputRange;
       const paramList = paramInputRange.slice().map((input, index) => {
         const id = input.id;
         const arrValue = this.model.data.map((item) => {
@@ -187,7 +185,6 @@ class AppController extends Loader {
         }
       });
       return paramList;
-
     }
   }
 
@@ -237,56 +234,50 @@ class AppController extends Loader {
 
   getParamInputValue() {
     if (this.options != null) {
+      const paramInputValue = this.options.paramInputValue;
+      const paramList = paramInputValue.slice().map((input, index) => {
+        const id = input.id;
 
-      const paramInputValue = this.options.paramInputValue
-      const paramList = paramInputValue
-        .slice()
-        .map((input, index) => {
-          const id = input.id;
-
-          const values: Value = this.model.data
-            .reduce((res: string[], item) => {
-              if (typeof item[id] === "boolean") {
-
-                if (res.includes("")) return res;
-                res.push("");
-                return res;
-
-              }
-              if (res.includes(item[id])) return res;
-
-              res.push(item[id])
+        const values: Value = this.model.data
+          .reduce((res: string[], item) => {
+            if (typeof item[id] === "boolean") {
+              if (res.includes("")) return res;
+              res.push("");
               return res;
-            }, [])
+            }
+            if (res.includes(item[id])) return res;
 
-            .reduce((obj, item) => {
-              return {
-                ...obj,
-                [item]: false,
-              };
-            }, {});
+            res.push(item[id]);
+            return res;
+          }, [])
 
-          if (this.dataState && this.filter[id]) {
+          .reduce((obj, item) => {
             return {
-              ...paramInputValue[index],
-              value: {
-                ...paramInputValue[index].value,
-                ...values,
-                ...this.filter[id],
-              },
+              ...obj,
+              [item]: false,
             };
-          } else {
-            return {
-              ...paramInputValue[index],
-              value: {
-                ...paramInputValue[index].value,
-                ...values,
-              },
-            };
-          }
-        });
+          }, {});
+
+        if (this.dataState && this.filter[id]) {
+          return {
+            ...paramInputValue[index],
+            value: {
+              ...paramInputValue[index].value,
+              ...values,
+              ...this.filter[id],
+            },
+          };
+        } else {
+          return {
+            ...paramInputValue[index],
+            value: {
+              ...paramInputValue[index].value,
+              ...values,
+            },
+          };
+        }
+      });
       return paramList;
-
     }
   }
 }

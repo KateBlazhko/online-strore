@@ -1,5 +1,4 @@
 import Control from "../common/control";
-import * as func from "../common/function";
 
 class Notification extends Control {
   public onClose: () => void;
@@ -14,11 +13,7 @@ class Notification extends Control {
 
     const overlay = new Control(this.node, "div", "notification__overlay");
 
-    const container = new Control(
-      overlay.node,
-      "div",
-      "notification__inner"
-    );
+    const container = new Control(overlay.node, "div", "notification__inner");
     const text = new Control(
       container.node,
       "span",
@@ -26,12 +21,11 @@ class Notification extends Control {
       notification
     );
 
-    setTimeout(() => this.onClose(), 1500)
+    setTimeout(() => this.onClose(), 1500);
 
     overlay.node.onclick = () => {
       this.onClose();
     };
-
   }
 }
 

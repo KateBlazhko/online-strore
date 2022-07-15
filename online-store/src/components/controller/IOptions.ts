@@ -2,9 +2,9 @@ import { IDataItem } from "../model/appModel";
 import { Value } from "../model/appState";
 
 export default interface IOptions {
-  "paramInputRange": IParamInputRange[],
-  "paramInputValue": IParamInputValue[],
-  "paramSorter": IParamSorter
+  paramInputRange: IParamInputRange[];
+  paramInputValue: IParamInputValue[];
+  paramSorter: IParamSorter;
 }
 
 export interface IParamInputRange {

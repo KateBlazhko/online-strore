@@ -4,8 +4,7 @@ enum Status {
 }
 
 class Loader {
-  
-  public load<Data>(
+  public static load<Data>(
     baseLink: string,
     callback: (data: Data) => void = () => {
       console.error("No callback for GET response");

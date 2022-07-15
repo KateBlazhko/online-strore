@@ -85,7 +85,6 @@ class InputDoubleRange extends Control {
           if (value === input.node.max) onReset(id, isLeft);
           else onChange(id, value, isLeft);
         }
-        
       };
 
       input.node.onmouseenter = () => {

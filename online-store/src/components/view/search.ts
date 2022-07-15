@@ -8,7 +8,9 @@ class Search extends Control {
     onSearch: (value: string) => void
   ) {
     super(parent, "div", className);
-    const title = new Control(this.node, "h2", "subtitle", "Search");
+
+    new Control(this.node, "h2", "subtitle", "Search");
+
     const input = new InputControl(
       this.node,
       "search__input",

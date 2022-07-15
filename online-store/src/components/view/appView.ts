@@ -29,6 +29,7 @@ class AppView {
     this.header = new Header(document.body, "header", countInCart);
     this.main = new Control(document.body, "main", "app");
     this.footer = new Control(document.body, "footer", "footer");
+    this.footer.node.innerHTML = AppView.drawFooter();
 
     const container = new Control(this.main.node, "div", "container");
     const settings = new Control(container.node, "div", "settings");
@@ -93,7 +94,7 @@ class AppView {
   }
 
   private drawSorters() {
-    const paramSorter = this.controller.getParamSorter()
+    const paramSorter = this.controller.getParamSorter();
 
     if (paramSorter !== undefined)
       return [
@@ -107,14 +108,14 @@ class AppView {
           }
         ),
       ];
-    return []
+    return [];
   }
 
   private drawFilters() {
     const paramInputRange = this.controller.getParamInputRange();
-    const paramInputValue = this.controller.getParamInputValue()
+    const paramInputValue = this.controller.getParamInputValue();
 
-    if (paramInputRange !== undefined && paramInputValue !== undefined) 
+    if (paramInputRange !== undefined && paramInputValue !== undefined)
       return [
         new FilterRange(
           this.settingsInner.node,
@@ -147,12 +148,26 @@ class AppView {
         ),
       ];
 
-      return []
+    return [];
   }
 
   public drawGoods(data: readonly IDataItem[]) {
     const [cardsInCart] = this.controller.getParamCart();
     this.goods.update(data, cardsInCart);
+  }
+
+  private static drawFooter() {
+    return `
+    <a class="link" href="https://github.com/KateBlazhko">KateBlazhko</a>
+    <span>2022</span>
+    <p class="text">
+      Training project
+    </p>
+    <div class="footer__rs">
+      <a class="link rs" href="https://rs.school/js/">«JavaScript/Frontend»</a>
+      <div class="rs__logo"></div>
+    </div>
+    `;
   }
 
   private onCartUp = (id: string, count: number) => {
@@ -163,11 +178,7 @@ class AppView {
       return true;
     }
 
-    const notification = new Notification(
-      document.body,
-      "notification",
-      isAdd
-    );
+    const notification = new Notification(document.body, "notification", isAdd);
 
     notification.onClose = () => {
       notification.node.remove();

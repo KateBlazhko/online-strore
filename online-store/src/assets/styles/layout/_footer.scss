@@ -6,21 +6,13 @@ footer {
   flex-wrap: wrap;
   column-gap: 20px;
 
-  color: #70d6ff;
-}
-footer .copyright {
-  font-size: 14px;
-  color: #333;
-  text-align: center;
-}
-footer .copyright a {
-  color: #444;
-}
-footer .copyright a:hover {
-  color: #555;
-}
-footer .copyright:before {
-  content: '©';
+  color: $footer-color;
+  font-size: 1.6rem;
+
+  .text {
+    text-align: center;
+    font-size: 2rem;
+  } 
 }
 
 .footer__rs {
@@ -31,11 +23,11 @@ footer .copyright:before {
 
 .link {
 text-decoration: none;
-color: #70d6ff;
+color: $footer-color
 }
 
 .link:hover {
-  color: #69db7e;
+  color: $footer-hover-color
 }
 
 .rs__logo {
@@ -46,7 +38,7 @@ color: #70d6ff;
   background-image: url("https://rs.school/images/rs_school_js.svg");
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: #70d6ff;
+  background-color: $footer-color
 }
 
 .rs {
@@ -54,5 +46,5 @@ color: #70d6ff;
 }
 
 .rs:hover ~ .rs__logo {
-  background-color: #69db7e;;
+  background-color: $footer-hover-color
 }

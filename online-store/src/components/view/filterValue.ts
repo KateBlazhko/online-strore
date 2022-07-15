@@ -24,7 +24,9 @@ class FilterValue extends Control {
 
       new InputMultipleValue(
         item.node,
-        `filter-value__input filter-value__input_${param[index].filter.toLowerCase()}`,
+        `filter-value__input filter-value__input_${param[
+          index
+        ].filter.toLowerCase()}`,
         param[index],
         onChange,
         onReset

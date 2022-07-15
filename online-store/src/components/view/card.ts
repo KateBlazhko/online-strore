@@ -4,7 +4,7 @@ import Popup from "./popup";
 import { IDataItem } from "../model/appModel";
 
 export class Card extends Control {
-  private content: string
+  private content: string;
 
   constructor(
     parent: HTMLElement | null,
@@ -22,12 +22,16 @@ export class Card extends Control {
     const img = new Control(this.node, "div", "card__img");
     img.node.style.backgroundImage = `url(./assets/img/${data.image})`;
 
-    this.content = new Control(this.node, "div", "card__inner").node.innerHTML = `
+    this.content = new Control(
+      this.node,
+      "div",
+      "card__inner"
+    ).node.innerHTML = `
     <div class="card__content">Model: <span>${data.model}</span></div>
     <div class="card__content">Chipmaker: <span>${data.chipmaker}</span></div>
     <div class="card__content">Year: <span>${data.release}</span></div>
     <div class="card__content">Count: <span>${count.toString()}</span></div>
-    <div class="card__content card__content_price">${data.price}BYN</div>`
+    <div class="card__content card__content_price">${data.price}BYN</div>`;
 
     const buttonDetails = new Control(
       this.node,
@@ -53,7 +57,7 @@ export class Card extends Control {
       "Add to cart"
     );
 
-    new Control(buttonAddCart.node,"div","logo logo_card");
+    new Control(buttonAddCart.node, "div", "logo logo_card");
 
     const buttonRemoveCart = new Control(
       this.node,

@@ -2,7 +2,7 @@ import Control from "../common/control";
 import Label from "./label";
 import { IParamSorter } from "../controller/IOptions";
 import InputControl from "./inputControl";
-import * as func from "../common/function"
+import * as func from "../common/function";
 
 class Sorter extends Control {
   public static id: number;
@@ -19,13 +19,13 @@ class Sorter extends Control {
 
     const choiceType = new Control(this.node, "div", "sorter__choice");
 
-      let content = ''
-      for (const key in param) {
-        if (param[key]) content = key.split(".")[0];
-      }
-      
-      this.type = new Control(choiceType.node, "div", "sorter__type", content);
-      const sorterIcon = new Control(choiceType .node, "div", "sorter__icon");
+    let content = "";
+    for (const key in param) {
+      if (param[key]) content = key.split(".")[0];
+    }
+
+    this.type = new Control(choiceType.node, "div", "sorter__type", content);
+    const sorterIcon = new Control(choiceType.node, "div", "sorter__icon");
 
     const sorterWrap = new Control(this.node, "div", "sorter__wrapper");
 
@@ -42,23 +42,23 @@ class Sorter extends Control {
       );
 
       input.onInput = () => {
-        this.changeType(input.node.value)
+        this.changeType(input.node.value);
         onChange(key);
       };
 
       const label = new Label(sorterWrap.node, "label label_sort", id, id);
       label.node.onclick = () => {
-        func.toggleClassName('open', sorterWrap.node, sorterIcon.node)
-      }
+        func.toggleClassName("open", sorterWrap.node, sorterIcon.node);
+      };
     }
 
     choiceType.node.onclick = () => {
-      func.toggleClassName('open', sorterWrap.node, sorterIcon.node)
-    }
+      func.toggleClassName("open", sorterWrap.node, sorterIcon.node);
+    };
   }
 
   changeType(value: string) {
-    this.type.node.textContent = value
+    this.type.node.textContent = value;
   }
 }
 
