@@ -38,6 +38,10 @@ body {
 
   background-image: url('./assets/img/bg.png');
   background-size: 100px;
+
+  .open {
+    overflow: hidden;
+  }
 }
 
 .scroll {

@@ -3,7 +3,7 @@
   flex-wrap:wrap;
   gap: 1rem;
 
-  padding: 1rem;
+  // padding: 1rem;
 
   .container {
     align-items: center;
@@ -13,6 +13,11 @@
     @include flex ($aling: center);
     gap: 0.5rem;
     color: $cart-count-color;
+
+    @media (max-width: ($tablet - 1px)) {
+      justify-content: center;
+      width: 100%;
+    }
 
     .logo {
       flex-shrink: 0;

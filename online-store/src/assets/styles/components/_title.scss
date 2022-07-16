@@ -1,15 +1,34 @@
 .title {
   font-size: 4rem;
-
   color: $cart-count-color;
+
+  @media (max-width: ($tablet - 1px)) {
+    font-size: 3rem;
+  }
+
+  &_header {
+
+    @media (max-width: ($tablet - 1px)) {
+      font-size: 2.9rem;
+    }
+  }
 
   &_goods {
     font-size: 3rem;
+    text-align: center;
   }
 }
 
 .subtitle {
   font-size: 2rem;
-
   line-height: 4.5rem;
+
+  &_header {
+    text-align: center;
+    line-height: 2rem;
+
+    @media (max-width: ($tablet - 1px)) {
+      font-weight: normal;
+    }
+  }
 }

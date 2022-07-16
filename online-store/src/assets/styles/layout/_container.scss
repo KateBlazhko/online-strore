@@ -1,6 +1,14 @@
 .container {
+  position: relative;
   @include flex();
-  gap: 2rem;
+  column-gap: 2rem;
+  row-gap: 1rem;
   width: 100%;
-  padding: 0 3rem;
+  padding: 2rem 3rem;
+
+  @media (max-width: ($tablet - 1px)) {
+    justify-content: center;
+    flex-wrap: wrap;
+    
+  }
 }

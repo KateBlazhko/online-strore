@@ -9,6 +9,7 @@ import Search from "./search";
 import Header from "./header";
 import Notification from "./notification";
 import { IDataItem } from "../model/appModel";
+import * as func from "../common/function";
 
 class AppView {
   private header: Header;
@@ -33,6 +34,12 @@ class AppView {
 
     const container = new Control(this.main.node, "div", "container");
     const settings = new Control(container.node, "div", "settings");
+    const settingsWrapper = new Control(settings.node, "div", "settings__wrapper");
+    const marker = new Control(settings.node, "div", "settings__marker", "Settings")
+    marker.node.onclick = () => {
+      func.toggleClassName("open", settings.node, document.body)
+    }
+
     this.goods = new Goods(
       container.node,
       "goods",
@@ -41,17 +48,17 @@ class AppView {
       this.onCartDown
     );
 
-    this.search = new Search(settings.node, "search", (value: string) => {
+    this.search = new Search(settingsWrapper.node, "search", (value: string) => {
       model.search(value);
     });
 
-    this.settingsInner = new Control(settings.node, "div", "settings__inner");
+    this.settingsInner = new Control(settingsWrapper.node, "div", "settings__inner");
 
     this.sortersList = this.drawSorters();
     this.filtersList = this.drawFilters();
 
     const buttonResetFilters = new Control(
-      settings.node,
+      settingsWrapper.node,
       "div",
       "button button_reset",
       "Reset filters"
@@ -63,7 +70,7 @@ class AppView {
     };
 
     const buttonResetSettings = new Control(
-      settings.node,
+      settingsWrapper.node,
       "div",
       "button button_reset",
       "Reset settings"

@@ -16,12 +16,12 @@ class Header extends Control {
     const title = new Control(container.node, "div", "header__title");
 
     new Control(title.node, "div", "logo");
-    new Control(title.node, "h1", "title", "Online-store");
+    new Control(title.node, "h1", "title title_header", "Online-store");
 
     new Control(
       container.node,
       "h2",
-      "subtitle",
+      "subtitle subtitle_header",
       "Used graphic cards from gaming PC only!"
     );
 
