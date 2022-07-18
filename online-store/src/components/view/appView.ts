@@ -16,6 +16,7 @@ class AppView {
   private main: Control;
   private footer: Control;
 
+  private model: AppModel;
   private controller: AppController;
   private settingsInner: Control;
   private filtersList: Control[];
@@ -24,6 +25,7 @@ class AppView {
   private goods: Goods;
 
   constructor(model: AppModel, controller: AppController) {
+    this.model = model;
     this.controller = controller;
     const [cardsInCart, countInCart] = this.controller.getParamCart();
 
@@ -34,11 +36,20 @@ class AppView {
 
     const container = new Control(this.main.node, "div", "container");
     const settings = new Control(container.node, "div", "settings");
-    const settingsWrapper = new Control(settings.node, "div", "settings__wrapper");
-    const marker = new Control(settings.node, "div", "settings__marker", "Settings")
+    const settingsWrapper = new Control(
+      settings.node,
+      "div",
+      "settings__wrapper"
+    );
+    const marker = new Control(
+      settings.node,
+      "div",
+      "settings__marker",
+      "Settings"
+    );
     marker.node.onclick = () => {
-      func.toggleClassName("open", settings.node, document.body)
-    }
+      func.toggleClassName("open", settings.node, document.body);
+    };
 
     this.goods = new Goods(
       container.node,
@@ -48,13 +59,22 @@ class AppView {
       this.onCartDown
     );
 
-    const searchValue = this.controller.getSearchValue()
+    const searchValue = this.controller.getSearchValue();
     const onInput = (value: string) => {
-      this.controller.onSearchChange(value)
-    }
-    this.search = new Search(settingsWrapper.node, "search", searchValue, onInput);
+      this.controller.onSearchChange(value);
+    };
+    this.search = new Search(
+      settingsWrapper.node,
+      "search",
+      searchValue,
+      onInput
+    );
 
-    this.settingsInner = new Control(settingsWrapper.node, "div", "settings__inner");
+    this.settingsInner = new Control(
+      settingsWrapper.node,
+      "div",
+      "settings__inner"
+    );
 
     this.sortersList = this.drawSorters();
     this.filtersList = this.drawFilters();
@@ -68,9 +88,9 @@ class AppView {
     buttonResetFilters.node.onclick = () => {
       this.filtersList.map((filter) => filter.destroy());
       this.controller.onReset();
-      const searchValue = this.controller.getSearchValue()
+      const searchValue = this.controller.getSearchValue();
 
-      this.search.update(searchValue)
+      this.search.update(searchValue);
       this.filtersList = this.drawFilters();
     };
 
@@ -94,16 +114,18 @@ class AppView {
       );
 
       this.controller.onResetAll();
-      const [_cardsInCart, countInCart] = this.controller.getParamCart();
-      const searchValue = this.controller.getSearchValue()
+      const countInCart = this.controller.getParamCart()[1];
+      const searchValue = this.controller.getSearchValue();
 
       this.header.update(countInCart);
-      this.search.update(searchValue)
+      this.search.update(searchValue);
       this.sortersList = this.drawSorters();
       this.filtersList = this.drawFilters();
     };
+  }
 
-    model.renderData = (data: readonly IDataItem[]) => {
+  public init() {
+    this.model.renderData = (data: readonly IDataItem[]) => {
       this.drawGoods(data);
     };
   }

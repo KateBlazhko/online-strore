@@ -19,7 +19,7 @@ export type Cart = {
 export interface IDataState {
   sorter: Sorter;
   filter: Filter;
-  search: string,
+  search: string;
   cart: Cart;
 }
 
@@ -45,7 +45,7 @@ export class AppState {
       dataState = {
         sorter: {},
         filter: {},
-        search: '',
+        search: "",
         cart: {},
       };
     }

@@ -22,7 +22,10 @@ class App {
 
     AppController.getData<IDataItem[]>("assets/json/data.json", (data) => {
       this.model.data = data;
+
       const view = new AppView(this.model, this.controller);
+      view.init();
+
       this.model.filterData(this.state.dataState);
     });
   }

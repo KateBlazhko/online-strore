@@ -2,8 +2,8 @@ import Control from "../common/control";
 import InputControl from "./inputControl";
 
 class Search extends Control {
-  input: InputControl
-  onSearch: (value: string) => void
+  input: InputControl;
+  onSearch: (value: string) => void;
 
   constructor(
     parent: HTMLElement | null,
@@ -22,9 +22,9 @@ class Search extends Control {
       "search"
     );
 
-    if (value) this.input.node.value = value
+    if (value) this.input.node.value = value;
 
-    this.onSearch = onSearch
+    this.onSearch = onSearch;
     this.input.onInput = (value) => {
       if (typeof value === "string") {
         this.onSearch(value);
@@ -33,7 +33,7 @@ class Search extends Control {
   }
 
   update(value: string) {
-    this.input.destroy()
+    this.input.destroy();
     this.input = new InputControl(
       this.node,
       "search__input",
@@ -47,8 +47,7 @@ class Search extends Control {
       }
     };
 
-    if (value) this.input.node.value = value
-
+    if (value) this.input.node.value = value;
   }
 }
 

@@ -121,7 +121,7 @@ class AppController {
     this.state.dataState = {
       ...this.state.dataState,
       filter: {},
-      search: '',
+      search: "",
     };
   }
 
@@ -129,7 +129,7 @@ class AppController {
     this.state.dataState = {
       sorter: {},
       filter: {},
-      search: '',
+      search: "",
       cart: {},
     };
   }
@@ -222,12 +222,12 @@ class AppController {
     this.state.dataState = {
       ...this.state.dataState,
 
-      search: value
+      search: value,
     };
   }
 
   getSearchValue() {
-    return this.state.dataState.search
+    return this.state.dataState.search;
   }
 
   public onFilterReset(idValue: string, nameValue: string) {
@@ -294,7 +294,6 @@ class AppController {
       return paramList;
     }
   }
-  
 }
 
 export default AppController;

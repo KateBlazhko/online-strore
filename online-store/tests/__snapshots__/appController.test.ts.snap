@@ -1,5 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AppController onReset should delete filters from datastate.filter 1`] = `
+Object {
+  "cart": Object {
+    "id": 1,
+  },
+  "filter": Object {
+    "filter": Object {
+      "value": true,
+    },
+  },
+  "search": "",
+  "sorter": Object {
+    "parameter": true,
+  },
+}
+`;
+
+exports[`AppController onResetAll should delete filters, sorter, cart from datastate 1`] = `
+Object {
+  "cart": Object {
+    "id": 1,
+  },
+  "filter": Object {
+    "filter": Object {
+      "value": true,
+    },
+  },
+  "search": "",
+  "sorter": Object {
+    "parameter": true,
+  },
+}
+`;
+
 exports[`AppController removeFromCart should remove from cart in controller.removeFromCart 1`] = `
 Object {
   "dataState": Object {
@@ -9,6 +43,7 @@ Object {
         "value": true,
       },
     },
+    "search": "",
     "sorter": Object {
       "parameter": true,
     },

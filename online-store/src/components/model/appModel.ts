@@ -106,13 +106,12 @@ class AppModel {
       }
     }
 
-    this.searchInData(this.assortedData, dataState)
-    // this.renderData(this.assortedData);
+    this.searchInData(dataState);
   }
 
-  public searchInData(data: readonly IDataItem[], dataState: IDataState) {
+  public searchInData(dataState: IDataState) {
     let searchData = this.assortedData.slice();
-    const value = dataState.search
+    const value = dataState.search;
     if (value) {
       searchData = AppModel.filter(searchData, "model", value);
     }
