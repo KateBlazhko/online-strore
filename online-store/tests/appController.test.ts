@@ -58,11 +58,11 @@ describe("AppController", () => {
     });
 
     it("should call AppController.getData with given args", () => {
-      const mockGetData = jest.spyOn(AppController, 'getData')
+      const mockGetData = jest.spyOn(AppController, "getData");
 
-      const callback = jest.fn()
-      const resut = AppController.getData('link', callback)
-    
+      const callback = jest.fn();
+      AppController.getData("link", callback);
+
       expect(mockGetData).toHaveBeenCalledWith("link", callback);
     });
   });

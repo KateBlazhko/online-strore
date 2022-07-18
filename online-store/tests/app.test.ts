@@ -1,8 +1,8 @@
-import App from '../src/components/app/app'
+import App from "../src/components/app/app";
 import AppController from "../src/components/controller/appController";
 import AppState from "../src/components/model/appState";
 import AppModel from "../src/components/model/appModel";
-import {  mockDataState,  mockonChange } from "./__mocks__/data";
+import { mockDataState, mockonChange } from "./__mocks__/data";
 
 jest.mock("../src/components/model/appState", () => {
   return {
@@ -15,31 +15,31 @@ jest.mock("../src/components/model/appState", () => {
   };
 });
 
-jest.mock('../src/components/controller/appController')
-jest.mock('../src/components/model/appModel')
+jest.mock("../src/components/controller/appController");
+jest.mock("../src/components/model/appModel");
 
 const mockGetData = jest
-  .spyOn(AppController, 'getData')
-  .mockImplementation(() => 'some-get-data');
+  .spyOn(AppController, "getData")
+  .mockImplementation(() => "some-get-data");
 
-const app = new App(new AppState)
+const app = new App(new AppState());
 
-describe('constructor', () => {
+describe("constructor", () => {
+  it("should call new AppController", () => {
+    expect((AppController as unknown as jest.Mock).mock.calls.length).toEqual(
+      1
+    );
+  });
 
-  it('should call new AppController', () => {
-    expect((AppController as unknown  as jest.Mock).mock.calls.length).toEqual(1)
-  })
+  it("should call new AppModel", () => {
+    expect((AppModel as unknown as jest.Mock).mock.calls.length).toEqual(1);
+  });
+});
 
-  it('should call new AppModel', () => {
-    expect((AppModel as unknown  as jest.Mock).mock.calls.length).toEqual(1)
-  })
-})
+describe("start", () => {
+  it("should call static method AppController", () => {
+    app.start();
 
-describe('start', () => {
-  it('should call static method AppController', () => {
-    app.start()
-  
-    expect(mockGetData).toHaveBeenCalledTimes(2)
-
-  })
-})
+    expect(mockGetData).toHaveBeenCalledTimes(2);
+  });
+});
