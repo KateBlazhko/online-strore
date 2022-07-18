@@ -106,15 +106,16 @@ class AppModel {
       }
     }
 
-    this.renderData(this.assortedData);
+    this.searchInData(this.assortedData, dataState)
+    // this.renderData(this.assortedData);
   }
 
-  public search(value: string) {
+  public searchInData(data: readonly IDataItem[], dataState: IDataState) {
     let searchData = this.assortedData.slice();
+    const value = dataState.search
     if (value) {
       searchData = AppModel.filter(searchData, "model", value);
     }
-
     this.renderData(searchData);
   }
 }

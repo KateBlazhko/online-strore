@@ -48,9 +48,11 @@ class AppView {
       this.onCartDown
     );
 
-    this.search = new Search(settingsWrapper.node, "search", (value: string) => {
-      model.search(value);
-    });
+    const searchValue = this.controller.getSearchValue()
+    const onInput = (value: string) => {
+      this.controller.onSearchChange(value)
+    }
+    this.search = new Search(settingsWrapper.node, "search", searchValue, onInput);
 
     this.settingsInner = new Control(settingsWrapper.node, "div", "settings__inner");
 
@@ -66,6 +68,9 @@ class AppView {
     buttonResetFilters.node.onclick = () => {
       this.filtersList.map((filter) => filter.destroy());
       this.controller.onReset();
+      const searchValue = this.controller.getSearchValue()
+
+      this.search.update(searchValue)
       this.filtersList = this.drawFilters();
     };
 
@@ -90,7 +95,10 @@ class AppView {
 
       this.controller.onResetAll();
       const [_cardsInCart, countInCart] = this.controller.getParamCart();
+      const searchValue = this.controller.getSearchValue()
+
       this.header.update(countInCart);
+      this.search.update(searchValue)
       this.sortersList = this.drawSorters();
       this.filtersList = this.drawFilters();
     };

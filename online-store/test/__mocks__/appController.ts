@@ -36,7 +36,7 @@ const mockOptions: IOptions = {
   paramInputValue: [],
   paramSorter : {'parameter': false}};
 
-const mockDataState = { sorter: {'parameter': true}, filter: {'filter': {'value': true}}, cart: {'id': 1} }
+const mockDataState = { sorter: {'parameter': true}, filter: {'filter': {'value': true}}, cart: {'id': 1}, search: '' }
 const mockonChange = { add:  jest.fn()}
 const mockData = [
   {

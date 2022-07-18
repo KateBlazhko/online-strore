@@ -121,6 +121,7 @@ class AppController {
     this.state.dataState = {
       ...this.state.dataState,
       filter: {},
+      search: '',
     };
   }
 
@@ -128,6 +129,7 @@ class AppController {
     this.state.dataState = {
       sorter: {},
       filter: {},
+      search: '',
       cart: {},
     };
   }
@@ -216,6 +218,18 @@ class AppController {
     };
   }
 
+  onSearchChange(value: string) {
+    this.state.dataState = {
+      ...this.state.dataState,
+
+      search: value
+    };
+  }
+
+  getSearchValue() {
+    return this.state.dataState.search
+  }
+
   public onFilterReset(idValue: string, nameValue: string) {
     const item = this.filter[idValue];
 
@@ -280,6 +294,7 @@ class AppController {
       return paramList;
     }
   }
+  
 }
 
 export default AppController;
