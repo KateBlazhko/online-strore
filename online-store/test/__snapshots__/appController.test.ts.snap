@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppController removeFromCart should remove from cart in controller.removeFromCart 1`] = `
+Object {
+  "dataState": Object {
+    "cart": Object {},
+    "filter": Object {
+      "filter": Object {
+        "value": true,
+      },
+    },
+    "sorter": Object {
+      "parameter": true,
+    },
+  },
+  "onChange": Object {
+    "add": [MockFunction] {
+      "calls": Array [
+        Array [
+          [Function],
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    },
+  },
+}
+`;
