@@ -9,7 +9,7 @@ import {
   mockonChange,
   mockFilterData,
   mockLoad,
-} from "./__mocks__/appController";
+} from "./__mocks__/data";
 
 jest.mock("../src/components/model/appState", () => {
   return {
@@ -50,11 +50,20 @@ describe("AppController", () => {
   });
 
   describe("getData", () => {
-    it("should called Loader.load in AppController.getData", () => {
+    it("should call Loader.load in AppController.getData", () => {
       Loader.load = mockLoad;
 
       AppController.getData("mockLink", () => {});
       expect(mockLoad).toHaveBeenCalled();
+    });
+
+    it("should call AppController.getData with given args", () => {
+      const mockGetData = jest.spyOn(AppController, 'getData')
+
+      const callback = jest.fn()
+      const resut = AppController.getData('link', callback)
+    
+      expect(mockGetData).toHaveBeenCalledWith("link", callback);
     });
   });
 

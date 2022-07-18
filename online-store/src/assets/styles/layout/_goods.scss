@@ -1,7 +1,7 @@
 .goods {
   @include flex();
   flex-wrap: wrap;
-  flex-basis: 70%;
+  flex-basis: 75%;
   gap: 2rem;
 
   &__card-wrapper {
