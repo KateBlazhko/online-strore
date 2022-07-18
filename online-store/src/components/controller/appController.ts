@@ -255,8 +255,8 @@ class AppController {
         const values: Value = this.model.data
           .reduce((res: string[], item) => {
             if (typeof item[id] === "boolean") {
-              if (res.includes("")) return res;
-              res.push("");
+
+              if (Boolean(item[id])) res.push("true");
               return res;
             }
             if (res.includes(item[id])) return res;

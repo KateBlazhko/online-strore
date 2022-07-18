@@ -40,7 +40,7 @@ export class AppState {
     let dataState: IDataState;
     try {
       dataState = AppState.load();
-      // dataState = { sorter: {}, filter: {}, cart: {} }
+      // dataState = { sorter: {}, filter: {}, cart: {}, search: '' }
     } catch (e: unknown) {
       dataState = {
         sorter: {},

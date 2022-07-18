@@ -30,8 +30,6 @@
   &_sort {
     padding: 1rem;
 
-    // line-height: 3em;
-
     &:hover {
       background-color: $sorter-border-color
     }
@@ -41,5 +39,9 @@
     width: auto;
 
     font-size: 2rem;
+  }
+
+  &_popular {
+    font-size: 0;
   }
 }
