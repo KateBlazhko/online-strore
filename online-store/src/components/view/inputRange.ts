@@ -19,7 +19,7 @@ class InputRange extends Control<HTMLInputElement> {
     if (max) this.node.max = max;
     this.node.step = step;
     this.node.value = value;
-    this.node.id = isLeft ? id + "-left" : id + "-right";
+    this.node.id = `${id}${isLeft ? '-left' : '-right'}`
   }
 }
 
