@@ -88,7 +88,7 @@ class InputDoubleRange extends Control {
       };
 
       input.node.onmouseenter = () => {
-        marker.onHide();
+        marker.show();
 
         if (isLeft) {
           this.inputLeft.node.style.zIndex = "3";
@@ -100,7 +100,7 @@ class InputDoubleRange extends Control {
       };
 
       input.node.onmouseleave = () => {
-        marker.onHide();
+        marker.hide();
       };
     });
   }

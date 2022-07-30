@@ -1,6 +1,16 @@
 import Control from "../common/control";
 
 class Marker extends Control {
+  _isHidden: boolean
+
+  set isHidden(value: boolean) {
+    this._isHidden = value
+  }
+
+  get isHidden() {
+    return this._isHidden
+  }
+  
   constructor(
     parent: HTMLElement | null,
     className: string,
@@ -8,7 +18,7 @@ class Marker extends Control {
     percent: number
   ) {
     super(parent, "div", className, content);
-
+    this._isHidden = true
     this.node.style.left = `${percent}%`;
     this.node.style.opacity = "0";
   }
@@ -18,9 +28,18 @@ class Marker extends Control {
     this.node.textContent = value;
   }
 
-  onHide() {
-    if (this.node.style.opacity === "1") this.node.style.opacity = "0";
-    else this.node.style.opacity = "1";
+  show() {
+    if (this.isHidden) {
+      this.node.style.opacity = "1"
+      this.isHidden = !this.isHidden
+    }
+  }
+
+  hide() {
+    if (!this.isHidden) {
+      this.node.style.opacity = "0"
+      this.isHidden = !this.isHidden
+    }
   }
 }
 
