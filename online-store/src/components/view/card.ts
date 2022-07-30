@@ -4,7 +4,7 @@ import Popup from "./popup";
 import { IDataItem } from "../model/appModel";
 
 export class Card extends Control {
-  private content: string;
+  private content: Control;
 
   constructor(
     parent: HTMLElement | null,
@@ -17,7 +17,6 @@ export class Card extends Control {
     super(parent, "div", className);
 
     const cardNumber = data.id;
-    const count = +data.quantity;
 
     const img = new Control(this.node, "div", "card__img");
     img.node.style.backgroundImage = `url(./assets/img/${data.image})`;
@@ -26,12 +25,9 @@ export class Card extends Control {
       this.node,
       "div",
       "card__inner"
-    ).node.innerHTML = `
-    <div class="card__content">Model: <span>${data.model}</span></div>
-    <div class="card__content">Chipmaker: <span>${data.chipmaker}</span></div>
-    <div class="card__content">Year: <span>${data.release}</span></div>
-    <div class="card__content">Count: <span>${count.toString()}</span></div>
-    <div class="card__content card__content_price">${data.price}BYN</div>`;
+    )
+
+    this.content.node.innerHTML = this.renderContent(data)
 
     const buttonDetails = new Control(
       this.node,
@@ -77,7 +73,7 @@ export class Card extends Control {
     };
 
     buttonAddCart.node.onclick = () => {
-      const isAdd = onCartUp(cardNumber, count);
+      const isAdd = onCartUp(cardNumber, +data.quantity);
 
       if (isAdd) {
         buttonRemoveCart.node.style.opacity = "1";
@@ -91,5 +87,15 @@ export class Card extends Control {
     const scrollWidth = scroll.node.offsetWidth - scroll.node.clientWidth;
     scroll.destroy();
     return scrollWidth;
+  }
+
+  private renderContent(data: IDataItem) {
+    return `
+    <div class="card__content">Model: <span>${data.model}</span></div>
+    <div class="card__content">Chipmaker: <span>${data.chipmaker}</span></div>
+    <div class="card__content">Year: <span>${data.release}</span></div>
+    <div class="card__content">Count: <span>${data.quantity}</span></div>
+    <div class="card__content card__content_price">${data.price}BYN</div>
+    `
   }
 }
