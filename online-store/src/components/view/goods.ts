@@ -4,13 +4,13 @@ import { IDataItem } from "../model/appModel";
 
 enum InnerText {
   title = "Our goods for you",
-  noFoundedText = "Sorry, nothing found..."
+  noFoundText = "Sorry, nothing found..."
 }
 
 class Goods extends Control {
   private dataList: Card[];
   private cardWrap: Control;
-  private noFoundedText: Control;
+  private noFoundText: Control;
   private cart: string[];
   private onCartUp: (id: string, count: number) => boolean;
   private onCartDown: (id: string) => void;
@@ -30,11 +30,11 @@ class Goods extends Control {
 
     new Control(this.node, "h2", "title title_goods", InnerText.title);
 
-    this.noFoundedText = new Control(
+    this.noFoundText = new Control(
       null,
       "p",
       "goods__text",
-      InnerText.noFoundedText
+      InnerText.noFoundText
     );
 
     this.cardWrap = new Control(this.node, "div", "goods__card-wrapper");
@@ -48,11 +48,11 @@ class Goods extends Control {
       this.dataList.map((dataItem) => dataItem.destroy());
 
     if (data && data.length > 0) {
-      this.noFoundedText.destroy();
+      this.noFoundText.destroy();
       this.draw(data);
 
     } else {
-      this.node.appendChild(this.noFoundedText.node)
+      this.node.appendChild(this.noFoundText.node)
     }
   }
   
